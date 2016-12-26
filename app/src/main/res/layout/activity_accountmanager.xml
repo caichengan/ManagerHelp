@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/tvAccountChange"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:layout_width="match_parent"
+            android:text="账户管理"
+            android:textSize="15sp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/colorGray"
+        android:layout_height="0.01dp"/>
+
+    <LinearLayout
+        android:id="@+id/tvMiMaChange"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:text="修改密码"
+            android:textSize="15sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

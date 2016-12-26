@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="1dp"
+    android:id="@+id/login_container" >
+
+        <LinearLayout
+            android:id="@+id/com"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:padding="3dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="客服名："
+                android:layout_marginLeft="20dp"
+                android:textColor="@android:color/background_dark"
+                style="@style/textSizeWide" />
+            <TextView
+                android:id="@+id/mPerCountName"
+                android:text="德华"
+                android:textColor="@android:color/background_dark"
+               style="@style/textSizeWide" />
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp" />
+            <TextView
+                android:text="步骤量："
+                android:textColor="@android:color/background_dark"
+                style="@style/textSizeWide"
+
+                />
+            <TextView
+                android:id="@+id/mPerCountNumber"
+                android:text="44"
+                android:textColor="@android:color/background_dark"
+                style="@style/textSizeWide"
+                android:layout_marginRight="20dp"
+
+                 />
+        </LinearLayout>
+
+
+</LinearLayout>

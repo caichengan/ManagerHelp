@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/editOldChange"
+            android:hint="请输入旧密码"
+            android:textSize="15sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/editNewChange"
+            android:hint="请输入新密码"
+            android:textSize="15sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/btnSure"
+            android:hint="确认"
+            android:background="@drawable/btn_background_circle"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+</LinearLayout>

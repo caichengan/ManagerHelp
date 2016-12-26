@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="1dp"
+    android:id="@+id/login_container" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/com"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="公司名："
+                android:textColor="@android:color/background_dark"
+                android:layout_marginLeft="10dp"
+                style="@style/textSizeWide" />
+            <TextView
+                android:id="@+id/mNewAddCustomerComName"
+                android:text="小后台"
+                android:textColor="@android:color/background_dark"
+               style="@style/textSizeWide" />
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp" />
+            <TextView
+                android:id="@+id/mNewAddCustomerComAddress"
+                android:text="公司名"
+                style="@style/textSizeWide"
+                android:layout_marginRight="10dp"
+                android:drawableLeft="@mipmap/company_address"
+                android:textColor="@color/colorGray"
+                 />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/contacts"
+            android:layout_below="@id/com"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="联系人："
+                android:layout_marginLeft="10dp"
+                style="@style/textSizeWide" />
+            <TextView
+                android:id="@+id/mNewAddCustomerContacts"
+                android:text="小后台"
+                style="@style/textSizeWide" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp" />
+            <TextView
+                android:id="@+id/mGetMoney"
+                android:text=""
+                style="@style/textSizeWide" />
+            <TextView
+                android:id="@+id/mGetMoneyTotal"
+                android:text=""
+                android:layout_marginRight="10dp"
+                style="@style/textSizeWide" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/contacts"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="业务类型："
+                android:layout_marginLeft="10dp"
+                style="@style/textSizeWide" />
+            <TextView
+                android:id="@+id/mNewAddCustomerStyle"
+                android:text="代理记账"
+                style="@style/textSizeWide" />
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp" />
+            <TextView
+                android:id="@+id/mNewAddCustomerTime"
+                android:text="2016-12-09 03:42:54"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/colorGray"
+                style="@style/textSizeWide" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

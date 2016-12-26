@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="1.3dp"
+    android:id="@+id/login_container" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/com"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="公司名："
+                android:textColor="@android:color/background_dark"
+                android:layout_marginLeft="10dp"
+                style="@style/textSizeWide" />
+            <TextView
+                android:id="@+id/mWarningComName"
+                android:text="小后台"
+                android:textColor="@android:color/background_dark"
+               style="@style/textSizeWide" />
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:text="办证人："
+                android:textColor="@color/colorGray"
+                android:layout_marginLeft="10dp"
+                style="@style/textSizeWide" />
+
+            <TextView
+                android:id="@+id/mWarningBanPeople"
+                android:text="合适"
+                android:textColor="@color/colorGray"
+                style="@style/textSizeWide"
+                android:layout_marginRight="10dp"
+                 />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/contacts"
+            android:layout_below="@id/com"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="步骤名："
+                android:layout_marginLeft="10dp"
+                style="@style/textSizeWide" />
+            <TextView
+                android:id="@+id/mWarningName"
+                android:text="工商核名"
+                style="@style/textSizeWide" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/contacts"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="得分："
+                android:layout_marginLeft="10dp"
+                style="@style/textSizeWide" />
+            <ImageView
+                android:id="@+id/mWarningStar1"
+                android:src="@drawable/list_icon_star_big_empty"
+                style="@style/imageWide" />
+            <ImageView
+                android:id="@+id/mWarningStar2"
+                android:src="@drawable/list_icon_star_big_empty"
+                style="@style/imageWide" />
+            <ImageView
+                android:id="@+id/mWarningStar3"
+                android:src="@drawable/list_icon_star_big_empty"
+                style="@style/imageWide" />
+            <ImageView
+                android:id="@+id/mWarningStar4"
+                android:src="@drawable/list_icon_star_big_empty"
+                style="@style/imageWide" />
+            <ImageView
+            android:id="@+id/mWarningStar5"
+            android:src="@drawable/list_icon_star_big_empty"
+            style="@style/imageWide" />
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp" />
+            <Button
+                android:id="@+id/mWarningRarise"
+                android:text="查看评语"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/btn_background_circle"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                 />
+            <Button
+                android:id="@+id/mWarningDone"
+                android:text="已处理"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/btn_background_circle"
+                android:layout_width="80dp"
+                android:textColor="@android:color/white"
+                android:layout_height="25dp"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

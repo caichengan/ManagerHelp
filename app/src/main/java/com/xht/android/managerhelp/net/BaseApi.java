@@ -1,0 +1,77 @@
+package com.xht.android.managerhelp.net;
+
+public class BaseApi {
+
+    //检查更新
+	public static final String CHECK_VERSION_URL = "";
+
+
+    //修改密码
+    public static final String CHANGMIMA_URL ="";
+
+    //首页数据
+    public static final String URL_Main = "http://www.xiaohoutai.com.cn:8888/XHT/employeeController/newIncreaseOrderTodayCount";
+
+    public static final String MAIN_URL = "";
+
+    //通讯录客户
+    public static final String CONTACTSPOST_URL = "http://www.xiaohoutai.com.cn:8888/XHT/homeOrderDetailController/AddressBookCustomerDetail";
+    //通讯录内部员工
+    public static final String CONTACTS_GONGSI_URL = "http://www.xiaohoutai.com.cn:8888/XHT/homeOrderDetailController/AddressBookEmployeeDetail";
+
+    //登录提交验证
+    public static final String LOGIN_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/ManagerLogin";
+
+    //修改账户
+    public static final String MANAGER_ZH_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/managerModifyTelOrName";
+
+    //修改密码
+    public static final String MANAGER_MIMA_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/managerModifyPw";
+
+
+    //访问本日订单
+    public static final String ORDER_DAY_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/newIncreaseOrderToday";
+
+    //访问本周
+    public static final String ORDER_WEEk_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/newIncreaseOrderCurrentWeek";
+
+    //访问本月
+    public static final String ORDER_MONTH_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/newIncreaseOrderCurrentMonth";
+
+
+    //访问本日收款量
+    public static final String MONEY_DAY_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/receivablesToday";
+
+    //访问本周
+    public static final String MONEY_WEEk_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/receivablesCurrentWeek";
+
+    //访问本月
+    public static final String MONEY_MONTH_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/receivablesCurrentMonth";
+
+
+    //访问本日步骤量
+    public static final String STEP_DAY_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/permitToday";
+
+    //访问本周
+    public static final String STEP_WEEk_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/permitCurrentWeek";
+
+    //访问本月
+    public static final String STEP_MONTH_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/permitCurrentMonth";
+
+    //访问本日低分预警
+    public static final String WARNING_DAY_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/lowLevelWarningNotDeal?k=t";
+
+    //访问本周
+    public static final String WARNING_WEEk_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/lowLevelWarningNotDeal?k=w";
+
+    //访问本月
+    public static final String WARNING_MONTH_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/lowLevelWarningNotDeal?k=m";
+
+    //已处理
+    public static final String WARNING_NONE_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/lowLevelWarningDealed";
+
+    //点击确认
+    public static final String WARNING_SURE_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/dealLowLevelWarningNotDeal";
+
+
+}
