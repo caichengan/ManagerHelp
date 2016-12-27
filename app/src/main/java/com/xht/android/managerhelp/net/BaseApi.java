@@ -10,12 +10,11 @@ public class BaseApi {
     public static final String CHANGMIMA_URL ="";
 
     //首页数据
-    public static final String URL_Main = "http://www.xiaohoutai.com.cn:8888/XHT/employeeController/newIncreaseOrderTodayCount";
 
-    public static final String MAIN_URL = "";
+    public static final String MAIN_URL = "http://www.xiaohoutai.com.cn:8888/XHT/employeeController/firstPageInfo";
 
     //通讯录客户
-    public static final String CONTACTSPOST_URL = "http://www.xiaohoutai.com.cn:8888/XHT/homeOrderDetailController/AddressBookCustomerDetail";
+    public static final String CONTACTSPOST_URL = "http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadMailListCustomer";
     //通讯录内部员工
     public static final String CONTACTS_GONGSI_URL = "http://www.xiaohoutai.com.cn:8888/XHT/homeOrderDetailController/AddressBookEmployeeDetail";
 
@@ -67,11 +66,25 @@ public class BaseApi {
     //访问本月
     public static final String WARNING_MONTH_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/lowLevelWarningNotDeal?k=m";
 
+
+    //访问本日业绩
+    public static final String PERFORM_DAY_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/achievementPermit?k=t";
+
+    //访问本周
+    public static final String PERFORM_WEEK_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/achievementPermit?k=w";
+
+    //访问本月
+    public static final String PERFORM_MONTH_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/achievementPermit?k=m";
+
     //已处理
     public static final String WARNING_NONE_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/lowLevelWarningDealed";
 
     //点击确认
     public static final String WARNING_SURE_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/dealLowLevelWarningNotDeal";
+
+
+    //上传图片
+    public static final String LOAD_PICTURE_URL="";
 
 
 }

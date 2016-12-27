@@ -22,9 +22,11 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 	private static final String TAG = "MainFragment";
 	private MainActivity mActivity;
 	private int uid;
-	private int mBZNum;
-	private int mRWNum;
-	private int mYJNum;
+	private String receivablesCountToday;
+	private String orderCountToday;
+	private String permitStepCountToday;
+	private String lowLevelWarningNotDealCount;
+	private String achievementPermitCountToday;
 	private TextView orderNumber;
 	private LinearLayout lLayout01;
 	private TextView moneyNumber;
@@ -32,6 +34,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 	private TextView stepNumber;
 	private LinearLayout lLayout03;
 	private TextView lowNumber;
+	private TextView permitNumber;
 	private LinearLayout lLayout04;
 	private LinearLayout lLayout05;
 	private LinearLayout lLayout06;
@@ -57,6 +60,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		userInfo = MainActivity.getInstance();
 
 		uid=userInfo.getUid();
+
+		getMainData();
 		/*pushAgent = App.getPushAgent();
 
 		//添加bu部分
@@ -89,15 +94,23 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		}
 		uid = userInfo.getUid();
 		LogHelper.i(TAG,"-----  getMainData  --"+uid);
-		if (uid != 0) {
+
 			VolleyHelpApi.getInstance().getMainData(uid, new APIListener() {
 
 				@Override
 				public void onResult(Object result) {
+
+					LogHelper.i(TAG, "------11首页的所有信息--");
 					LogHelper.i(TAG, "------11首页的所有信息--" + result.toString());
 					//{"yw":0,"bz":0,"yj":3}
 					//JSONObject JSONOB= (JSONObject) result;
 					//{"message":"系统错误","result":"error","entity":null,"code":"0"}
+					//{"receivablesCountToday":"0",收款量
+					// "achievementPermitCountToday":"0",//业绩统计
+					// "orderCountToday":"0",订单
+					// "lowLevelWarningNotDealCount":"0",低分预警
+					// "permitStepCountToday":"0"}办证步骤量
+
 					String code = ((JSONObject) result).optString("code");
 					if (code.equals("0")){
 						LogHelper.i(TAG, "-----if-shouye--" + result.toString());
@@ -105,10 +118,15 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 					}else {
 						LogHelper.i(TAG, "----else--shouye--" + result.toString());
 						JSONObject JSONOB = ((JSONObject) result).optJSONObject("entity");
-						mBZNum = JSONOB.optInt("bz");
-						mRWNum = JSONOB.optInt("yw");
-						mYJNum = JSONOB.optInt("yj");
-						LogHelper.i(TAG, "----所有信息--" + mBZNum + mRWNum + mYJNum);
+						receivablesCountToday = JSONOB.optString("receivablesCountToday");
+						orderCountToday = JSONOB.optString("orderCountToday");
+						permitStepCountToday = JSONOB.optString("permitStepCountToday");
+						lowLevelWarningNotDealCount = JSONOB.optString("lowLevelWarningNotDealCount");
+						achievementPermitCountToday = JSONOB.optString("achievementPermitCountToday");
+
+
+						LogHelper.i(TAG, "----所有信息--" + receivablesCountToday + orderCountToday + permitStepCountToday+lowLevelWarningNotDealCount+achievementPermitCountToday);
+						App.getInstance().showToast("----所有信息--" + receivablesCountToday + orderCountToday + permitStepCountToday+lowLevelWarningNotDealCount+achievementPermitCountToday);
 						uDpateDataMethod();
 					}
 				}
@@ -117,15 +135,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 					App.getInstance().showToast(e.toString());
 				}
 			});
-		}else {
-			App.getInstance().showToast("服务器繁忙，请退出稍后再试...");
-		}
+
 	}
-	private void uDpateDataMethod() {
-		orderNumber.setText(mBZNum+"");
-		moneyNumber.setText(mRWNum+"");
-		stepNumber.setText(mYJNum+"");
-	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -193,11 +205,20 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		stepNumber = (TextView) view.findViewById(R.id.stepNumber);
 		lLayout03 = (LinearLayout) view.findViewById(R.id.lLayout03);
 		lowNumber = (TextView) view.findViewById(R.id.lowNumber);
+		permitNumber = (TextView) view.findViewById(R.id.permitNumber);
 		lLayout04 = (LinearLayout) view.findViewById(R.id.lLayout04);
 		lLayout05 = (LinearLayout) view.findViewById(R.id.lLayout05);
 		lLayout06 = (LinearLayout) view.findViewById(R.id.lLayout06);
 	}
 
+
+	private void uDpateDataMethod() {
+		orderNumber.setText(orderCountToday);
+		moneyNumber.setText(receivablesCountToday);
+		stepNumber.setText(permitStepCountToday);
+		lowNumber.setText(lowLevelWarningNotDealCount);
+		permitNumber.setText(achievementPermitCountToday);
+	}
 	boolean isUserLogin() {
 		if (userInfo.getUid() == 0) {
 			Cursor cursor = mActivity.getContentResolver().query(MyDatabaseManager.MyDbColumns.CONTENT_URI, null, null, null, null);

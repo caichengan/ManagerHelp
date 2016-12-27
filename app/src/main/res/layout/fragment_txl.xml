@@ -12,16 +12,7 @@
         android:background="@drawable/while_stroke"
         android:layout_marginRight="30dp"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/mCollectContacts"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="收藏"
-            android:visibility="gone"
-            android:clickable="true"
-            android:textColor="@android:color/white"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/mClientContacts"
             android:layout_width="0dp"

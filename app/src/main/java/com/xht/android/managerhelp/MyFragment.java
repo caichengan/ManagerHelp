@@ -212,7 +212,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 				}
 				break;
 			case R.id.head_img://头像
-				IntentUtils.startActivityNumberForResult(10,getActivity(),LoadPersonImageView.class);
+				//IntentUtils.startActivityNumberForResult(10,getActivity(),LoadPersonImageView.class);
 				break;
 		}
 	}

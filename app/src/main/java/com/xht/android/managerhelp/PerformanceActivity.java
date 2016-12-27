@@ -86,28 +86,21 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                 }, 3000);
             }
         });
-
         mListViewDatas = new ArrayList<>();
-
         btnDay.setTextColor(Color.RED);
-        getNewAddCustomer(0);
         getPerformanceDay();
         btnDay.setOnClickListener(this);
         btnWeekDay.setOnClickListener(this);
         btnMonth.setOnClickListener(this);
-
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         Bundle bundle = getIntent().getBundleExtra("bundle");
         uid = bundle.getInt("uid", -1);
         LogHelper.i(TAG,"----uid----"+ uid);
-
         getPerformanceDay();
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -123,9 +116,7 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
         btnDay.setTextColor(Color.WHITE);
         btnMonth.setTextColor(Color.WHITE);
         btnWeekDay.setTextColor(Color.WHITE);
-
     }
-
     @Override
     public void onClick(View v) {
         resetColor();
@@ -142,7 +133,6 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                 selectNumber = 1;
                 getPerformanceWeek();
                 break;
-
             case R.id.btnMonth:
                 //切换到本月
                 btnMonth.setTextColor(Color.RED);
@@ -150,30 +140,24 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                 selectNumber = 2;
                 break;
         }
-
-        getNewAddCustomer(selectNumber);
-
     }
-
-
     //本日
     private void getPerformanceDay() {
             mListViewDatas.clear();
             VolleyHelpApi.getInstance().getPerformanceDay(new APIListener() {
                 @Override
                 public void onResult(Object result) {
-                    LogHelper.i(TAG, "-----getStepNumberDay--" + result.toString());
+                    LogHelper.i(TAG, "-----getPerformanceDay--" + result.toString());
                     JSONArray JsonAy = null;
                     try {
                         JsonAy = ((JSONObject) result).getJSONArray("entity");
                         int JsonArryLenth=JsonAy.length();
                         for (int i=0;i<JsonArryLenth;i++){
-
                             //TODO 数据还没有获取到
                             PerformanceBean item=new PerformanceBean();
                             JSONObject JsonItem = (JSONObject) JsonAy.get(i);
-                            item.setServericName(JsonItem.getString(""));
-                            item.setStepNumber(JsonItem.getString(""));
+                            item.setServericName(JsonItem.getString("employeeName"));
+                            item.setStepNumber(JsonItem.getString("permitcount"));
 
                             mListViewDatas.add(item);
                             LogHelper.i(TAG, "-----3--" );
@@ -185,7 +169,6 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                     LogHelper.i(TAG,"----size-"+size);
                     tvPerformance.setText(""+mListViewDatas.size());
                     performanceAdapter.notifyDataSetChanged();
-
                 }
                 @Override
                 public void onError(Object e) {
@@ -204,7 +187,7 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
     //本周
     private void getPerformanceWeek() {
         mListViewDatas.clear();
-        VolleyHelpApi.getInstance().getPerformanceDay(new APIListener() {
+        VolleyHelpApi.getInstance().getPerformanceWeek(new APIListener() {
             @Override
             public void onResult(Object result) {
                 LogHelper.i(TAG, "-----getStepNumberDay--" + result.toString());
@@ -217,8 +200,8 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                         //TODO 数据还没有获取到
                         PerformanceBean item=new PerformanceBean();
                         JSONObject JsonItem = (JSONObject) JsonAy.get(i);
-                        item.setServericName(JsonItem.getString(""));
-                        item.setStepNumber(JsonItem.getString(""));
+                        item.setServericName(JsonItem.getString("employeeName"));
+                        item.setStepNumber(JsonItem.getString("permitcount"));
                         mListViewDatas.add(item);
                         LogHelper.i(TAG, "-----3--" );
                     }
@@ -246,10 +229,10 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
     //本月
     private void getPerformanceMonth() {
         mListViewDatas.clear();
-        VolleyHelpApi.getInstance().getPerformanceDay(new APIListener() {
+        VolleyHelpApi.getInstance().getPerformanceMonth(new APIListener() {
             @Override
-            public void onResult(Object result) {
-                LogHelper.i(TAG, "-----getStepNumberDay--" + result.toString());
+            public void onResult(Object result) {//{"employeeId":2,"permitcount":8,"employeeName":"安仔"}
+                LogHelper.i(TAG, "-----getPerformanceMonth--" + result.toString());
                 JSONArray JsonAy = null;
                 try {
                     JsonAy = ((JSONObject) result).getJSONArray("entity");
@@ -262,8 +245,8 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                         PerformanceBean item=new PerformanceBean();
                         JSONObject JsonItem = (JSONObject) JsonAy.get(i);
 
-                        item.setServericName(JsonItem.getString("companyName"));
-                        item.setStepNumber(JsonItem.getString("companyName"));
+                        item.setServericName(JsonItem.getString("employeeName"));
+                        item.setStepNumber(JsonItem.getString("permitcount"));
 
                         mListViewDatas.add(item);
                         LogHelper.i(TAG, "-----3--" );

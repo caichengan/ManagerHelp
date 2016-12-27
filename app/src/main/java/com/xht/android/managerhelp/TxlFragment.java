@@ -20,6 +20,7 @@ import com.xht.android.managerhelp.mode.SortModel;
 import com.xht.android.managerhelp.net.APIListener;
 import com.xht.android.managerhelp.net.VolleyHelpApi;
 import com.xht.android.managerhelp.util.CharacterParser;
+import com.xht.android.managerhelp.util.IntentUtils;
 import com.xht.android.managerhelp.util.LogHelper;
 import com.xht.android.managerhelp.util.PinyinComparator;
 import com.xht.android.managerhelp.view.ClearEditText;
@@ -31,8 +32,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 通讯录界面
@@ -40,7 +39,6 @@ import java.util.regex.Pattern;
 public class TxlFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "TxlFragment";
     private MainActivity mActivity;
-    private TextView mCollectContacts;
     private TextView mClientContacts;
     private TextView mInsideContacts;
 
@@ -52,7 +50,6 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
     private CharacterParser characterParser;
 
     private ListView mClientListView;
-    private List<SortModel> mClientListOther=new ArrayList<>();
     private String mContactName;
     private String mContactsPhone;
     private String mId;
@@ -74,13 +71,13 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_txl, container, false);
-        mCollectContacts = (TextView) view.findViewById(R.id.mCollectContacts);
         mClientContacts = (TextView) view.findViewById(R.id.mClientContacts);
         mInsideContacts = (TextView)view.findViewById(R.id.mInsideContacts);
         // mFragmentTXL = (FrameLayout) view.findViewById(R.id.mFragmentTXL);
 
         mClientEdit = (ClearEditText) view.findViewById(R.id.mClientEdit);
         mClientListView = (ListView) view.findViewById(R.id.mClientList);
+
         mClientListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -88,40 +85,24 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
 
                 //这里要利用adapter.getItem(position)来获取当前position所对应的对象
                 String name = ((SortModel) mSortAdapter.getItem(position)).getName();
-
-                //区分出汉字与数字正则表达式
-                Pattern p = Pattern.compile("[\\u4e00-\\u9fa5]+|\\d+");
-                Matcher m = p.matcher( name );
-                while ( m.find() ) {
-                    String subname = m.group();
-                    boolean isNum = subname.matches("[0-9]+");
-                    if (!isNum){
-                        mContactName = subname;
-                    }else{
-                        mContactsPhone = subname;
-                        String ids[]=mContactsPhone.split("[0-9]{11}");
-                        mId="";
-                        for (int i=0;i<ids.length;i++){
-                            mId=mId+ids[i];
-                        }
-                        LogHelper.i(TAG,"-------mid--"+mId);
-                       /* string v = "123456789";
-                        string s = v.Substring(0,v.length-4);*/
-                        mContactsPhone= mContactsPhone.substring(0,mContactsPhone.length()-mId.length());
-                        LogHelper.i(TAG,"-------mContactsPhone--"+mContactsPhone);
-                    }
-                }
+               App.getInstance().showToast("name"+name);
+                String[] split = name.split("_", 3);
+                String mName = split[0];
+                String mComName = split[1];
+                String mPhone = split[2];
+                Log.i(TAG,"----1--"+split[0]);
+                Log.i(TAG,"----2--"+split[1]);
+                Log.i(TAG,"----3--"+split[2]);
+                App.getInstance().showToast("mName----:"+mName+"----mPhone:"+mPhone+"---mComName:"+mComName);
                 Bundle bundle=new Bundle();
-                bundle.putString("mContactName",mContactName);
+                bundle.putString("mContactName",mName);
                 bundle.putString("mId",mId);
-                bundle.putString("style",style);
-                bundle.putString("mContactsPhone",mContactsPhone);
-                LogHelper.i(TAG,"------"+position+";;;;"+mContactName+mContactsPhone);
-              //  IntentUtils.startActivityNumber(mActivity,bundle,TXLContactsDetial.class);
-                //Toast.makeText(getActivity(), position+"--"+name , Toast.LENGTH_SHORT).show();
+                bundle.putString("mComName",mComName);
+                bundle.putString("mPhone",mPhone);
+                LogHelper.i(TAG,"------"+position+";;;;"+mName+mComName+mPhone);
+               IntentUtils.startActivityNumber(mActivity,bundle,TXLContactsDetial.class);
             }
         });
-        mCollectContacts.setOnClickListener(this);
         mClientContacts.setOnClickListener(this);
         mInsideContacts.setOnClickListener(this);
 
@@ -139,7 +120,6 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
                 if (mClientList.size()>0) {
                     filterData(s.toString());
                 }
-
             }
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
@@ -166,10 +146,7 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
         mInsideContacts.setTextColor(Color.GRAY);
         mClientContacts.setTextColor(Color.WHITE);
         switch (v.getId()){
-            case R.id.mCollectContacts:
-                LogHelper.i(TAG,"----collection");
-                selectText(0);
-                break;
+
             case R.id.mClientContacts:
                 selectText(1);
                 LogHelper.i(TAG,"----ClientContacts");
@@ -186,35 +163,24 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
         clearBack();
 
         switch (i){
-            case 0:
-                //getTXLBarData();
-                mCollectContacts.setBackgroundResource(R.drawable.btn_background_circle);
-
-                break;
             case 1:
-
-
                 getTXLBarData();
                 mClientContacts.setBackgroundResource(R.drawable.btn_background_circle);
-
                 mClientContacts.setTextColor(Color.WHITE);
                 mInsideContacts.setTextColor(Color.GRAY);
                 break;
             case 2:
-
                 getTXLInsideData();
                 // mInsideContacts.setBackgroundColor(0xff33b5e5);
                 mInsideContacts.setBackgroundResource(R.drawable.btn_background_circle);
                 mClientContacts.setTextColor(Color.GRAY);
                 mInsideContacts.setTextColor(Color.WHITE);
                 break;
-
         }
     }
     private void clearBack() {
         mClientList.clear();
-        mClientListOther.clear();
-        mCollectContacts.setBackgroundColor(Color.TRANSPARENT);
+
         mClientContacts.setBackgroundColor(Color.TRANSPARENT);
         mInsideContacts.setBackgroundColor(Color.TRANSPARENT);
     }
@@ -232,17 +198,19 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
                     JsonAy = ((JSONObject) result).getJSONArray("entity");
                     int JsonArryLenth=JsonAy.length();
                     for (int i=0;i<JsonArryLenth;i++){
+                        ////{"ordContactId":1,"companyId":"12","companyName":"安测试公司一","telephone":"13531829360","contactName":"安"},
                         SortModel item=new SortModel();
                         JSONObject JsonItem = (JSONObject) JsonAy.get(i);
-                        String id = JsonItem.optString("id");
+                        String id = JsonItem.optString("ordContactId");
                         String contactName = JsonItem.optString("contactName");
                         String telephone = JsonItem.optString("telephone");//起始步骤
+                        String companyName = JsonItem.optString("companyName");//起始步骤
                         item.setName(contactName);
                         item.setPhoneNum(telephone);
+                        item.setCompanyName(companyName);
                         item.setId(id);
 
                         mClientList.add(item);
-                        mClientListOther.add(item);
                         LogHelper.i(TAG, "-----t通讯录--" +i+"--"+contactName+telephone);
                     }
                 } catch (JSONException e) {
@@ -270,17 +238,19 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
                 try {
                     JsonAy = ((JSONObject) result).getJSONArray("entity");
                     int JsonArryLenth=JsonAy.length();
-                    for (int i=0;i<JsonArryLenth;i++){//[{"id":1,"telephone":"13531833516","contactName":"韦继胜"}
+                    for (int i=0;i<JsonArryLenth;i++){//{"ordContactId":1,"companyId":"12","companyName":"安测试公司一","telephone":"13531829360","contactName":"安"},
+                        // {"ordContactId":1,"companyId":"14","companyName":"测试公司二","telephone":"13531829360","contactName":"安"},{"ordContactId":1,"companyId":"16","companyName":"测试公司三","telephone":"13531829360","contactName":"安"},{"ordContactId":1,"companyId":"17","companyName":"古古怪怪","telephone":"13531829360","contactName":"安"},{"ordContactId":1,"companyId":"27","companyName":"测试公司四","telephone":"13531829360","contactName":"安"},{"ordContactId":1,"companyId":"28","companyName":"测试公司五","telephone":"13531829360","contactName":"安"},{"ordContactId":1,"companyId":"29","companyName":"测试公司八","telephone":"13531829360","contactName":"安"},{"ordContactId":2,"companyId":"13","companyName":"中山市小后台会计服务有限公司","telephone":"13421411253","contactName":"覃源恒"},
                         SortModel item=new SortModel();
                         JSONObject JsonItem = (JSONObject) JsonAy.get(i);
                         String id = JsonItem.optString("id");
                         String employeeName = JsonItem.optString("employeeName");
                         String telephone = JsonItem.optString("telephone");//起始步骤
+                        String companyName = JsonItem.optString("companyName");//起始步骤
                         item.setName(employeeName);
                         item.setPhoneNum(telephone);
+                        item.setCompanyName(companyName);
                         item.setId(id);
                         mClientList.add(item);
-                        mClientListOther.add(item);
 
                         LogHelper.i(TAG, "-----内部通讯录--" +i+"--"+employeeName+telephone);
                     }
@@ -304,7 +274,7 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
         String[] date = new String[len];
         Log.i(TAG, "----len-" + len);
         for (int i = 0; i < len; i++) {
-            date[i] = mClientList.get(i).getName()+"_"+mClientList.get(i).getPhoneNum()+"_"+mClientList.get(i).getId();
+            date[i] = mClientList.get(i).getName()+"_"+mClientList.get(i).getCompanyName()+"_"+mClientList.get(i).getPhoneNum();
 
             LogHelper.i(TAG,"--------"+i+"--"+mClientList.get(i).getId());
             LogHelper.i(TAG,"-------date-"+i+"--"+date[i].toString());

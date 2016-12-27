@@ -73,101 +73,6 @@ public class NoManagerFragment extends Fragment {
 	}
 
 
-
-
-
-    //本周
-    private void getLowDatasWeek() {
-
-        mListViewDatas.clear();
-        VolleyHelpApi.getInstance().getLowDatasWeek(new APIListener() {
-            //"entity":[{"telephone":"13652365101","employeeName":"祝飞"},{"telephone":"13652365101","employeeName":"ZHUFEI"}
-            @Override
-            public void onResult(Object result) {
-                LogHelper.i(TAG, "-----getLowDatasWeek--" + result.toString());
-             JSONObject obj=   (JSONObject) result;
-                String code = obj.optString("code");
-                if (code.equals("0")){
-                    LogHelper.i(TAG, "-----code--" + result.toString());
-                    return;
-                }
-                JSONArray JsonAy = null;
-                try {
-
-                    //{"level":"1","commentTime":"1482395879410","commentContent":"一个星","companyName":"测试公司八",
-                    // "flowName":"资料交接","orderId":"12","flowId":"1","commentId":1,"employeeName":"安仔"}
-                    JsonAy = obj.getJSONArray("entity");
-                    int JsonArryLenth=JsonAy.length();
-
-                    LogHelper.i(TAG,"--------JsonArryLenth----"+JsonArryLenth);
-
-                    for (int i=0;i<JsonArryLenth;i++){//[{"id":1,"telephone":"13531833516","contactName":"韦继胜"}
-                        NewDataBean item=new NewDataBean();
-                        JSONObject JsonItem = (JSONObject) JsonAy.get(i);
-
-                        item.setStatus(JsonItem.getString("dealStatus"));
-                        item.setCommentId(JsonItem.getString("commentId"));
-                        item.setComName(JsonItem.getString("companyName"));
-                        item.setBanZhengContact(JsonItem.getString("employeeName"));
-                        item.setComment(JsonItem.getString("commentContent"));
-                        item.setLevel(JsonItem.getString("level"));
-                        item.setStepName(JsonItem.getString("flowName"));
-                        mListViewDatas.add(item);
-                        LogHelper.i(TAG, "----item---" );
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-                lowWarningAdapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onError(Object e) {
-                App.getInstance().showToast(e.toString());
-                lowWarningAdapter.notifyDataSetChanged();
-            }
-        });
-
-    }
-
-    //本月
-    private void getLowDatasMonth() {
-        mListViewDatas.clear();
-        VolleyHelpApi.getInstance().getLowDatasMonth(new APIListener() {
-            //"entity":[{"telephone":"13652365101","employeeName":"祝飞"},{"telephone":"13652365101","employeeName":"ZHUFEI"}
-            @Override
-            public void onResult(Object result) {
-                LogHelper.i(TAG, "-----getLowDatasMonth--" + result.toString());
-                JSONArray JsonAy = null;
-                try {
-                    JsonAy = ((JSONObject) result).getJSONArray("entity");
-                    int JsonArryLenth=JsonAy.length();
-                    for (int i=0;i<JsonArryLenth;i++){//[{"id":1,"telephone":"13531833516","contactName":"韦继胜"}
-                        NewDataBean item=new NewDataBean();
-                        JSONObject JsonItem = (JSONObject) JsonAy.get(i);
-                        item.setComName(JsonItem.getString("companyName"));
-                        item.setCommentId(JsonItem.getString("commentId"));
-                        item.setBanZhengContact(JsonItem.getString("employeeName"));
-                        item.setComment(JsonItem.getString("commentContent"));
-                        item.setLevel(JsonItem.getString("level"));
-                        item.setStepName(JsonItem.getString("flowName"));
-                        item.setStatus(JsonItem.getString("dealStatus"));
-                        mListViewDatas.add(item);
-                        LogHelper.i(TAG, "-------" );
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                lowWarningAdapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onError(Object e) {
-                App.getInstance().showToast(e.toString());
-                lowWarningAdapter.notifyDataSetChanged();
-            }
-        });
-    }
     //本日
     private void getLowDatasDay() {
             mListViewDatas.clear();
@@ -197,12 +102,18 @@ public class NoManagerFragment extends Fragment {
                         e.printStackTrace();
                     }
 
-                    tvLowNotDone.setText("33");
+                    int size = mListViewDatas.size();
+                    LogHelper.i(TAG,"----size-"+size);
+                    tvLowNotDone.setText(""+mListViewDatas.size());
                     lowWarningAdapter.notifyDataSetChanged();
                 }
                 @Override
                 public void onError(Object e) {
                     App.getInstance().showToast(e.toString());
+                    int size = mListViewDatas.size();
+                    LogHelper.i(TAG,"----size-"+size);
+                    tvLowNotDone.setText(""+mListViewDatas.size());
+                    lowWarningAdapter.notifyDataSetChanged();
                 }
             });
         lowWarningAdapter = new LowWarningAdapter(listviewLowWarning,mListViewDatas,getActivity());
