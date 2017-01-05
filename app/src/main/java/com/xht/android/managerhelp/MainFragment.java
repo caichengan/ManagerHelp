@@ -153,7 +153,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		lLayout03.setOnClickListener(this);
 		lLayout04.setOnClickListener(this);
 		lLayout05.setOnClickListener(this);
-		return view;		
+		lLayout06.setOnClickListener(this);
+		return view;
 	}
 	@Override
 	public void onClick(View v) {
@@ -192,6 +193,10 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
 
 				IntentUtils.startActivityNumber(getActivity(),bundle,PerformanceActivity.class);
+				break;
+			case R.id.lLayout06:
+
+				IntentUtils.startActivityNumber(getActivity(),bundle,MyCustomerDetialActivity.class);
 				break;
 		}
 

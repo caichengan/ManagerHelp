@@ -72,6 +72,16 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".MyCustomerActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".MyCustomerDetialActivity"
+
+         >
+
+        </activity>
+
         <provider
             android:name=".provider.DatabaseHelpProvider"
             android:authorities="com.xht.android.managerhelp.DatabaseHelpProvider"

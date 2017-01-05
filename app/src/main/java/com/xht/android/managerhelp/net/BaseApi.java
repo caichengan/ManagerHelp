@@ -2,12 +2,20 @@ package com.xht.android.managerhelp.net;
 
 public class BaseApi {
 
+    /*signingConfigs {
+        release {
+            storeFile file('D:/xht/xhtmanager.jks')
+            keyAlias 'xhtkey'
+            keyPassword 'xhtcca'
+            storePassword 'xiaohoutaicca'
+        }
+    }*/
+
     //检查更新
-	public static final String CHECK_VERSION_URL = "";
+	public static final String CHECK_VERSION_URL = "http://www.xiaohoutai.com.cn:8888/XHT/business/ApkmanagerController/updateApkVersion";
 
 
-    //修改密码
-    public static final String CHANGMIMA_URL ="";
+
 
     //首页数据
 
@@ -85,6 +93,9 @@ public class BaseApi {
 
     //上传图片
     public static final String LOAD_PICTURE_URL="";
+
+    //获取客户所有信息
+    public static final String GET_MYCUSTOMER_URL="";
 
 
 }

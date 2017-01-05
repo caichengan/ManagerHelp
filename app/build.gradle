@@ -7,19 +7,20 @@ android {
         applicationId "com.xht.android.managerhelp"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 100
-        versionName "1.00"
+        versionCode 102
+        versionName "1.02"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
         release {
-            storeFile file('D:/xht/xhtmanager.jks')
+            storeFile file('D:/xht/manager.jks')
             keyAlias 'xhtkey'
             keyPassword 'xhtcca'
             storePassword 'xiaohoutaicca'
         }
     }
+
 
     buildTypes {
         release {
@@ -37,6 +38,7 @@ dependencies {
     compile files('libs/xUtils-2.6.14.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
+    compile 'com.inkapplications.viewpageindicator:library:2.4.3'
     testCompile 'junit:junit:4.12'
 }
 

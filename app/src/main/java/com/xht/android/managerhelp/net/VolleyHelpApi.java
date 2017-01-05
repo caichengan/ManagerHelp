@@ -1022,6 +1022,50 @@ public class VolleyHelpApi extends BaseApi{
 		});
 		App.getInstance().addToRequestQueue(req, TAG);
 	}
+
+	/**
+	 * 获取所有的客户信息
+	 */
+	public void getDatasFromCustomer(final APIListener apiListener) {
+
+		String strurl=MakeURL(GET_MYCUSTOMER_URL,new LinkedHashMap<String, Object>(){{
+
+		}});
+
+		JsonObjectRequest req = new JsonObjectRequest(strurl, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogHelper.i(TAG, response.toString());
+				if (isResponseError(response)) {
+					String errMsg = response.optString("message");
+					apiListener.onError(errMsg);
+				} else {
+					LogHelper.i(TAG, "----的所有信息--" + response.toString());
+					apiListener.onResult(response);
+				}
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+		App.getInstance().addToRequestQueue(req, TAG);
+	}
 }
 
 

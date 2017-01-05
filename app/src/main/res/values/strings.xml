@@ -8,6 +8,7 @@
     <string name="banzhengnum_str">办证步骤量(本日)</string>
     <string name="lownum_str">低分预警</string>
     <string name="banzhengyeji_str">办证业绩统计(本日)</string>
+    <string name="mycustomer">我的客户</string>
     <string name="yuan">%1$.2f</string>
     <string name="heji_yuanjiaofen">¥ %1$.2f</string>
     <string name="pull_to_refresh">下拉可以刷新</string>

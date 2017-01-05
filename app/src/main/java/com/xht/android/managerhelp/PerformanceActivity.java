@@ -41,6 +41,8 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
     private PerformanceAdapter performanceAdapter;
     private int uid;
     private TextView tvPerformance;
+    private String number;
+    private int stepNumber=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +122,7 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         resetColor();
+        stepNumber=0;
         switch (v.getId()){
             case R.id.btnDay:
                 btnDay.setTextColor(Color.RED);
@@ -167,15 +170,19 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                     }
                     int size = mListViewDatas.size();
                     LogHelper.i(TAG,"----size-"+size);
-                    tvPerformance.setText(""+mListViewDatas.size());
+                    for (PerformanceBean bean:mListViewDatas){
+                        number = bean.getStepNumber();
+                        stepNumber =stepNumber+ Integer.parseInt(number);
+
+                    }
+                    tvPerformance.setText(""+stepNumber);
                     performanceAdapter.notifyDataSetChanged();
                 }
                 @Override
                 public void onError(Object e) {
                     App.getInstance().showToast(e.toString());
-                    int size = mListViewDatas.size();
-                    LogHelper.i(TAG,"----size-"+size);
-                    tvPerformance.setText(""+mListViewDatas.size());
+
+                    tvPerformance.setText(""+0);
                     performanceAdapter.notifyDataSetChanged();
                 }
             });
@@ -210,16 +217,20 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                 }
                 int size = mListViewDatas.size();
                 LogHelper.i(TAG,"----size-"+size);
-                tvPerformance.setText(""+mListViewDatas.size());
+                for (PerformanceBean bean:mListViewDatas){
+                    number = bean.getStepNumber();
+                    stepNumber =stepNumber+ Integer.parseInt(number);
+
+                }
+                tvPerformance.setText(""+stepNumber);
                 performanceAdapter.notifyDataSetChanged();
 
             }
             @Override
             public void onError(Object e) {
                 App.getInstance().showToast(e.toString());
-                int size = mListViewDatas.size();
-                LogHelper.i(TAG,"----size-"+size);
-                tvPerformance.setText(""+mListViewDatas.size());
+
+                tvPerformance.setText(""+0);
                 performanceAdapter.notifyDataSetChanged();
             }
         });
@@ -256,16 +267,20 @@ public class PerformanceActivity extends Activity implements View.OnClickListene
                 }
                 int size = mListViewDatas.size();
                 LogHelper.i(TAG,"----size-"+size);
-                tvPerformance.setText(""+mListViewDatas.size());
+                for (PerformanceBean bean:mListViewDatas){
+                    number = bean.getStepNumber();
+                    stepNumber =stepNumber+ Integer.parseInt(number);
+
+                }
+                tvPerformance.setText(""+stepNumber);
                 performanceAdapter.notifyDataSetChanged();
 
             }
             @Override
             public void onError(Object e) {
                 App.getInstance().showToast(e.toString());
-                int size = mListViewDatas.size();
-                LogHelper.i(TAG,"----size-"+size);
-                tvPerformance.setText(""+mListViewDatas.size());
+
+                tvPerformance.setText(""+0);
                 performanceAdapter.notifyDataSetChanged();
             }
         });

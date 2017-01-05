@@ -122,21 +122,24 @@ public class SplashActivity extends Activity {
                 LogHelper.i(TAG, "--------版本更新的所有信息--------" );
                 LogHelper.i(TAG, "---版本更新的所有信息--" + result.toString());
 
-                //"entity":{"downloadurl":"http:\/\/www.xiaohoutai.com.cn:8888\/XHT\/business\/apkcustomerserviceController\/downloadApk?fileName=1480303305698app-release.apk",
-                // "version":"10"}
-                //获取当前版本号
+               //{"savePath":"1482894779892_app-release.apk","upEmployeeId":"#","downloadUrl":"http:\/\/www.xiaohoutai.com.cn:8888\/XHT\/business\/ApkmanagerController\/downloadManagerApk","uploadTime":"1482894779892",
+                // "apkId":1,"updateDescribe":"有新版本，及时更新","version":"101"}
                 String appInfoName = AppInfoUtils.getAppInfoName(SplashActivity.this);
                 int appInfoNumber = AppInfoUtils.getAppInfoNumber(SplashActivity.this);
                 LogHelper.i(TAG, "---有新版本，下载更新" + appInfoName + "-" + appInfoNumber);
-
-
                 String versionNum = mJsonVersion.optString("version");
                 String updateDescribe = mJsonVersion.optString("updateDescribe");
                 //服务器中的版本号
+
                 Double versionNew = Double.parseDouble(versionNum);
-                String downloadurl = mJsonVersion.optString("downloadurl");
-                LogHelper.i(TAG, "-----前versionNum：=" + versionNew + "---" + downloadurl);
+
+                String downloadurl = mJsonVersion.optString("downloadUrl");
+                LogHelper.i(TAG, "-----downloadurl：=" + downloadurl + "---" );
+
+
+             /*   LogHelper.i(TAG, "-----前versionNum：=" + versionNew + "---" + downloadurl);
                 LogHelper.i(TAG, "-----appInfoNumber：=" + appInfoNumber + "---" );
+                LogHelper.i(TAG, "-----downloadurl：=" + downloadurl + "---" );*/
                 if (versionNew > appInfoNumber) {
                     versionNew = versionNew / 100.00;
                     LogHelper.i(TAG, "-------后--versionNum：=" + versionNew + "---" + downloadurl);
@@ -206,8 +209,9 @@ public class SplashActivity extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 App.getInstance().showToast("请稍等片刻...");
                 //开源项目断点下载xUtils
+                HttpUtils http = new HttpUtils();
 
-                HttpUtils http=new HttpUtils();
+                LogHelper.i(TAG,"----------downLoadUrl----"+downLoadUrl);
                 final File file=new File(Environment.getExternalStorageDirectory(),"manager.apk");
                 http.download(downLoadUrl, file.getAbsolutePath(), true, new RequestCallBack<File>() {
                     //下载失败
@@ -225,7 +229,14 @@ public class SplashActivity extends Activity {
                         intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
                         startActivity(intent);
                         LogHelper.i(TAG,"------------======-------");
-
+                                /*//下载成功，替换安装
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addCategory("android.intent.category.DEFAULT");
+                                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "kefu.apk")), "application/vnd.android.package-archive");
+                                SplashActivity.this.startActivity(intent);
+                               // android.os.Process.killProcess(android.os.Process.myPid());
+                                LogHelper.i(TAG,"------------======-------");*/
 
                     }
 

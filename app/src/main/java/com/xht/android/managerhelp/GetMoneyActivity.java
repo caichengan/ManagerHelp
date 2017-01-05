@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,8 @@ public class GetMoneyActivity extends Activity implements View.OnClickListener {
     private GetMoneyAdapter mGetMoneyAdapter;
     private int selectNumber;
     private TextView tvGetMoney;
+    private String orderMoney;
+    private int money=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,7 @@ public class GetMoneyActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         resetColor();
+        money=0;
         switch (v.getId()){
             case R.id.btnDay:
                 //切换到本日
@@ -165,7 +169,13 @@ public class GetMoneyActivity extends Activity implements View.OnClickListener {
                 }
                 int size = mListViewDatas.size();
                 LogHelper.i(TAG,"----size-"+size);
-                tvGetMoney.setText(""+mListViewDatas.size());
+                for (NewDataBean bean:mListViewDatas){
+                    orderMoney = bean.getOrderMoney();
+                    if (!TextUtils.isEmpty(orderMoney)){
+                        money =money+ Integer.parseInt(orderMoney);
+                    }
+                }
+                tvGetMoney.setText(String.format(getResources().getString(R.string.heji_yuanjiaofen), money / 100.00f));
                 mGetMoneyAdapter.notifyDataSetChanged();
             }
             @Override
@@ -222,16 +232,22 @@ public class GetMoneyActivity extends Activity implements View.OnClickListener {
                 }
                 int size = mListViewDatas.size();
                 LogHelper.i(TAG,"----size-"+size);
-                tvGetMoney.setText(""+mListViewDatas.size());
+                for (NewDataBean bean:mListViewDatas){
+                    orderMoney = bean.getOrderMoney();
+
+                    if (!TextUtils.isEmpty(orderMoney)){
+                        money =money+ Integer.parseInt(orderMoney);
+                    }
+                }
+                tvGetMoney.setText(String.format(getResources().getString(R.string.heji_yuanjiaofen), money / 100.00f));
                 mGetMoneyAdapter.notifyDataSetChanged();
 
             }
             @Override
             public void onError(Object e) {
                 App.getInstance().showToast(e.toString());
-                int size = mListViewDatas.size();
-                LogHelper.i(TAG,"----size-"+size);
-                tvGetMoney.setText(""+mListViewDatas.size());
+
+                tvGetMoney.setText(""+0);
                 mGetMoneyAdapter.notifyDataSetChanged();
             }
         });
@@ -273,15 +289,23 @@ public class GetMoneyActivity extends Activity implements View.OnClickListener {
                 }
                 int size = mListViewDatas.size();
                 LogHelper.i(TAG,"----size-"+size);
-                tvGetMoney.setText(""+mListViewDatas.size());
+                for (NewDataBean bean:mListViewDatas){
+                    orderMoney = bean.getOrderMoney();
+
+                    if (!TextUtils.isEmpty(orderMoney)){
+                        money =money+ Integer.parseInt(orderMoney);
+                    }
+
+
+                }
+                tvGetMoney.setText(String.format(getResources().getString(R.string.heji_yuanjiaofen), money / 100.00f));
                 mGetMoneyAdapter.notifyDataSetChanged();
             }
             @Override
             public void onError(Object e) {
                 App.getInstance().showToast(e.toString());
-                int size = mListViewDatas.size();
-                LogHelper.i(TAG,"----size-"+size);
-                tvGetMoney.setText(""+mListViewDatas.size());
+
+                tvGetMoney.setText(""+0);
             }
         });
 

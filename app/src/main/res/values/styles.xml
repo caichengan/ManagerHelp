@@ -49,4 +49,18 @@
         <item name="android:layout_height">20dp</item>
     </style>
 
+    <style name="MyTextAppearance.TabPageIndicator" parent="">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@drawable/viewpager_title_textcolor</item>
+    </style>
+
+
+    <style name="MyTheme" parent="AppBaseTheme">
+        <item name="vpiTabPageIndicatorStyle">@style/MyTabPageIndicator</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:animationDuration">5000</item>
+    </style>
+
+
+
 </resources>
