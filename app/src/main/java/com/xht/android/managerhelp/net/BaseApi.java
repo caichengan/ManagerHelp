@@ -98,4 +98,13 @@ public class BaseApi {
     public static final String GET_MYCUSTOMER_URL="";
 
 
+    //获取公司人员信息
+    public static final String COMPLETE_NAME_URL="";
+
+    //获取客户的所有订单信息
+    public static final String CUSTOMER_ORDER_URL="";
+
+
+
+
 }

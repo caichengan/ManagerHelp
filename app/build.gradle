@@ -7,14 +7,14 @@ android {
         applicationId "com.xht.android.managerhelp"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 102
-        versionName "1.02"
+        versionCode 109
+        versionName "1.09"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
         release {
-            storeFile file('D:/xht/manager.jks')
+            storeFile file('D:/xht/xhtmanager.jks')
             keyAlias 'xhtkey'
             keyPassword 'xhtcca'
             storePassword 'xiaohoutaicca'
@@ -40,5 +40,7 @@ dependencies {
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
     compile 'com.inkapplications.viewpageindicator:library:2.4.3'
     testCompile 'junit:junit:4.12'
+    compile files('libs/gson-2.3.1.jar')
+
 }
 

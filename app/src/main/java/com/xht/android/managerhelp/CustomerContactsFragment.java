@@ -5,6 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+
+import com.xht.android.managerhelp.mode.ContactsAdapter;
+import com.xht.android.managerhelp.mode.ContactsMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/1/5.
@@ -27,6 +35,10 @@ public class CustomerContactsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView addCustomer;
+    private ListView contactsListView;
+
+    private List<ContactsMode> contactsList;
 
 
     public CustomerContactsFragment() {
@@ -58,14 +70,45 @@ public class CustomerContactsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+        contactsList=new ArrayList<>();
+
+        //获取联系人名单
+        getContactsList();
+
+    }
+
+    private void getContactsList() {
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer, container, false);
+        View view = inflater.inflate(R.layout.fragment_customer, container, false);
+
+
+        addCustomer = (ImageView) view.findViewById(R.id.addCustomer);
+        contactsListView = (ListView) view.findViewById(R.id.contactsListView);
+
+        addCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
+
+        ContactsAdapter adapter=new ContactsAdapter(contactsList,getActivity());
+        contactsListView.setAdapter(adapter);
+
+        return view;
     }
+
 
 }
 

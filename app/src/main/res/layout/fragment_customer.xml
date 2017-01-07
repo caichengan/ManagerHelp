@@ -4,8 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:text="联系人"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/addCustomer"
+            android:layout_width="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/contactsListView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

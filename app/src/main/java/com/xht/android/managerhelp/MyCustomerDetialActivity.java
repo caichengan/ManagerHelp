@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 办证中任务详情
+ * 我的客户详细信息
  * @author czw 2016-10-13
  */
 public class MyCustomerDetialActivity extends FragmentActivity {
@@ -54,12 +54,12 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         aBar.setDisplayOptions(change);
 
         mListFragment = new ArrayList<>();
-        mFragment1=new OrderFragment();
-        mFragment2=new FollowFragment();
-        mFragment3=new DetialFragment();
-        mFragment4=new PictureFragment();
-        mFragment5=new CustomerContactsFragment();
-        mFragment6=new DeclareTaxFragment();
+        mFragment1=OrderFragment.newInstance("","");
+        mFragment2= FollowFragment.newInstance("","");
+        mFragment3=DetailFragment.newInstance("","");
+        mFragment4= PictureFragment.newInstance("","");
+        mFragment5= CustomerContactsFragment.newInstance("","");
+        mFragment6= DeclareTaxFragment.newInstance("","");
 
         mListFragment.add(mFragment1);
         mListFragment.add(mFragment2);
