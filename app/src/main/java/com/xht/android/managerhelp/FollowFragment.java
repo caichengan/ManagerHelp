@@ -30,6 +30,7 @@ public class FollowFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ListView followListView;
 
 
     public FollowFragment() {
@@ -67,7 +68,7 @@ public class FollowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_follow, container, false);
-        ListView  orderListView = (ListView)view. findViewById(R.id.flolowListView);
+        followListView = (ListView)view. findViewById(R.id.flolowListView);
         final PullRefreshLayout  swipeRefreshLayout = (PullRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
         swipeRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
@@ -84,6 +85,7 @@ public class FollowFragment extends Fragment {
             }
         });
 
+        followListView.setAdapter(null);
 
         return view;
     }
