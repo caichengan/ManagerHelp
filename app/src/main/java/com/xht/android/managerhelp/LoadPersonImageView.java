@@ -25,6 +25,7 @@ import com.xht.android.managerhelp.net.VolleyHelpApi;
 import com.xht.android.managerhelp.util.BitmapHelper;
 import com.xht.android.managerhelp.util.BitmapUtils;
 import com.xht.android.managerhelp.util.LogHelper;
+import com.xht.android.managerhelp.view.ChoosePicDialog;
 import com.xht.android.managerhelp.view.RoundImageView;
 
 import org.json.JSONObject;

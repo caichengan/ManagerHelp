@@ -94,15 +94,21 @@ public class BaseApi {
     //上传图片
     public static final String LOAD_PICTURE_URL="";
 
-    //获取客户所有信息
-    public static final String GET_MYCUSTOMER_URL="";
+    //获取所有的公司所有信息
+    public static final String GET_MYCUSTOMER_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadAllCompanyInfo" ;
+
 
 
     //获取公司人员信息
-    public static final String COMPLETE_NAME_URL="";
+    public static final String COMPLETE_NAME_URL="http://www.xiaohoutai.com.cn:8888/XHT/appCompanyController/getCompanyDataDetail";
 
-    //获取客户的所有订单信息
-    public static final String CUSTOMER_ORDER_URL="";
+    //获取某个客户的所有订单信息
+    public static final String CUSTOMER_ORDER_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadCompanyOrder" ;
+
+
+    //获取某个订单信息
+    public static final String DETIALS_ORDER_URL="" ;
+
 
 
 

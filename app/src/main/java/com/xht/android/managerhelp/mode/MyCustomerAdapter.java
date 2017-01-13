@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.xht.android.managerhelp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,15 +17,11 @@ import java.util.List;
 
 public class MyCustomerAdapter extends BaseAdapter {
     private Context mContext;
-    private List<MyCustomerMode> myCustomerLists=new ArrayList();
+    private List<MyCustomerMode> myCustomerLists;
 
-
-    public MyCustomerAdapter(Context mContext) {
-        this.mContext=mContext;
-    }
-
-    public void addList(List<MyCustomerMode> mLists){
-        myCustomerLists.addAll(mLists);
+    public MyCustomerAdapter(Context mContext, List<MyCustomerMode> myCustomerLists) {
+        this.mContext = mContext;
+        this.myCustomerLists = myCustomerLists;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.xht.android.managerhelp;
 import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.viewpagerindicator.TabPageIndicator;
+import com.xht.android.managerhelp.fragment.CustomerContactsFragment;
+import com.xht.android.managerhelp.fragment.DeclareTaxFragment;
+import com.xht.android.managerhelp.fragment.DetailFragment;
+import com.xht.android.managerhelp.fragment.FollowFragment;
+import com.xht.android.managerhelp.fragment.OrderFragment;
+import com.xht.android.managerhelp.fragment.PictureFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +39,10 @@ public class MyCustomerDetialActivity extends FragmentActivity {
     public String phone;
     private  ProgressDialog mProgDoal;
     private List<android.support.v4.app.Fragment> mListFragment;
+    private String orderId;
+    private String companyId;
+    private String customerName;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -43,9 +54,19 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         setTheme(com.viewpagerindicator.R.style.Theme_PageIndicatorDefaults);
         //setTheme(R.style.MyTextAppearance_TabPageIndicator);
 
+       /* bundle.putString("companyName",companyName);
+        bundle.putString("customerName",customerName);
+        bundle.putString("orderId",orderId);*/
+
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        companyName = bundle.getString("companyName");
+        companyId = bundle.getString("companyId");
+
+
         TextView mCustomView = new TextView(this);
         mCustomView.setGravity(Gravity.CENTER);
-        mCustomView.setText("我的客户");
+        mCustomView.setText(companyName+"");
+        mCustomView.setTextColor(Color.BLACK);
         mCustomView.setTextSize(18);
         final ActionBar aBar = getActionBar();
         aBar.setCustomView(mCustomView,
@@ -54,12 +75,12 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         aBar.setDisplayOptions(change);
 
         mListFragment = new ArrayList<>();
-        mFragment1=OrderFragment.newInstance("","");
-        mFragment2= FollowFragment.newInstance("","");
-        mFragment3=DetailFragment.newInstance("","");
-        mFragment4= PictureFragment.newInstance("","");
-        mFragment5= CustomerContactsFragment.newInstance("","");
-        mFragment6= DeclareTaxFragment.newInstance("","");
+        mFragment1= OrderFragment.newInstance(""+companyId,""+companyName);
+        mFragment2= FollowFragment.newInstance(""+companyId,""+companyName);
+        mFragment3= DetailFragment.newInstance(""+companyId,""+companyName);
+        mFragment4= PictureFragment.newInstance(""+companyId,""+companyName);
+        mFragment5= CustomerContactsFragment.newInstance(""+companyId,""+companyName);
+        mFragment6= DeclareTaxFragment.newInstance(""+companyId,""+companyName);
 
         mListFragment.add(mFragment1);
         mListFragment.add(mFragment2);
@@ -109,11 +130,9 @@ public class MyCustomerDetialActivity extends FragmentActivity {
 
             super(fm);
         }
-
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
             //新建一个Fragment来展示ViewPager item的内容，并传递参数
-
             return mListFragment.get(position);
         }
 
@@ -126,8 +145,6 @@ public class MyCustomerDetialActivity extends FragmentActivity {
             return mListFragment.size();
         }
     }
-
-
 
 
     /**

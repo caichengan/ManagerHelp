@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.xht.android.managerhelp.fragment.NoManagerFragment;
+import com.xht.android.managerhelp.fragment.YesManagerFragment;
 import com.xht.android.managerhelp.util.LogHelper;
 
 

@@ -11,4 +11,6 @@
     <color name="normal_dark_green">#ff32c888</color>
     <color name="n_d_green">#ff007f8c</color>
     <color name="jinhuang">#efc10b</color>
+    <color name="black">#0e0e0e</color>
+    <color name="while1">#fbffffff</color>
 </resources>

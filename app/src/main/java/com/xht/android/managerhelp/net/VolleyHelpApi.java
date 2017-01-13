@@ -1024,7 +1024,7 @@ public class VolleyHelpApi extends BaseApi{
 	}
 
 	/**
-	 * 获取所有的客户信息
+	 * 获取所有的客户公司信息
 	 */
 	public void getDatasFromCustomer(final APIListener apiListener) {
 
@@ -1036,13 +1036,10 @@ public class VolleyHelpApi extends BaseApi{
 			@Override
 			public void onResponse(JSONObject response) {
 				LogHelper.i(TAG, response.toString());
-				if (isResponseError(response)) {
-					String errMsg = response.optString("message");
-					apiListener.onError(errMsg);
-				} else {
-					LogHelper.i(TAG, "----的所有信息--" + response.toString());
+
+					LogHelper.i(TAG, "------entity--" + response.toString());
 					apiListener.onResult(response);
-				}
+
 			}
 		}, new Response.ErrorListener() {
 			@Override
@@ -1114,19 +1111,19 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 获取客户订单数据
-	 * @param companyId
+	 * @param companyid
 	 * @param apiListener
      */
-	public void getOrderListDatas(final int companyId, final APIListener apiListener) {
-
+	public void getOrderListDatas(final String companyid, final APIListener apiListener) {
+//{"message":"没有订单","result":"error","entity":null,"code":"0"}
 		String strUrl=MakeURL(CUSTOMER_ORDER_URL,new LinkedHashMap<String, Object>(){{
-			put("companyId",companyId);
+			put("companyid",companyid);
 		}});
 
 		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-
+				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
 				LogHelper.i(TAG,"--------"+response.toString());
 				apiListener.onResult(response);
 
@@ -1152,6 +1149,52 @@ public class VolleyHelpApi extends BaseApi{
 				apiListener.onError("服务器繁忙，稍后再试...");
 			}
 		});
+
+		App.getInstance().addToRequestQueue(reg, TAG);
+
+	}
+
+	/**
+	 * 获取订单详细信息
+	 * @param orderId
+	 * @param apiListener
+     */
+	public void getOrderDetials(final String orderId, final APIListener apiListener) {
+		String strUrl=MakeURL(DETIALS_ORDER_URL,new LinkedHashMap<String, Object>(){{
+			put("orderId",orderId);
+		}});
+
+		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
+				LogHelper.i(TAG,"--------"+response.toString());
+				apiListener.onResult(response);
+
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+
+		App.getInstance().addToRequestQueue(reg, TAG);
 
 	}
 }

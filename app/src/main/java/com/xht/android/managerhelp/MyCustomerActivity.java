@@ -16,15 +16,20 @@ import com.xht.android.managerhelp.mode.MyCustomerAdapter;
 import com.xht.android.managerhelp.mode.MyCustomerMode;
 import com.xht.android.managerhelp.net.APIListener;
 import com.xht.android.managerhelp.net.VolleyHelpApi;
+import com.xht.android.managerhelp.util.IntentUtils;
 import com.xht.android.managerhelp.util.LogHelper;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/1/5.
+ *
+ * 我的客户页面
  */
 public class MyCustomerActivity extends Activity{
 
@@ -34,8 +39,8 @@ public class MyCustomerActivity extends Activity{
     private ListView myCustomerList;
     private PullRefreshLayout swipeRefreshLayout;
     private MyCustomerAdapter mMyCustomerAdapter;
-    private List<MyCustomerMode> mListMyCustomer;
     private PullRefreshLayout layout;
+    private List<MyCustomerMode> companyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,7 @@ public class MyCustomerActivity extends Activity{
         Bundle bundle = getIntent().getBundleExtra("bundle");
         uid = bundle.getInt("uid", -1);
         LogHelper.i(TAG,"----uid----"+ uid);
+        companyList = new ArrayList<MyCustomerMode>();
         initialize();
 
 
@@ -88,6 +94,7 @@ public class MyCustomerActivity extends Activity{
         swipeRefreshLayout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
 
+        myCustomerList.setFastScrollEnabled(true);
         layout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
@@ -100,6 +107,8 @@ public class MyCustomerActivity extends Activity{
                         // 刷新3秒完成
                         App.getInstance().showToast("刷新完成");
 
+
+
                     }
                 }, 3000);
             }
@@ -111,29 +120,54 @@ public class MyCustomerActivity extends Activity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                MyCustomerMode myCustomerMode = companyList.get(position);
+                String companyName = myCustomerMode.getCompanyName();
+                String companyId = myCustomerMode.getCompanyId();
+
+                Bundle bundle=new Bundle();
+                bundle.putString("companyName",companyName);
+                bundle.putString("companyId",companyId);
+                IntentUtils.startActivityNumber(MyCustomerActivity.this,bundle,MyCustomerDetialActivity.class);
+
             }
         });
 
-        mMyCustomerAdapter = new MyCustomerAdapter(this);
-        myCustomerList.setAdapter(mMyCustomerAdapter);
-
         getMyCuetomer();
-        mListMyCustomer=new ArrayList<>();
-        mMyCustomerAdapter.addList(mListMyCustomer);
-
     }
 
+    /**
+     * 获取所有的客户信息
+     */
     private void getMyCuetomer() {
 
         VolleyHelpApi.getInstance().getDatasFromCustomer(new APIListener() {
             @Override
             public void onResult(Object result) {
-              JSONArray jsonArray= (JSONArray) result;
-                LogHelper.i(TAG,"-------------"+jsonArray.toString());
+                JSONArray jsonArray= null;
 
+
+                try {
+                    jsonArray = ((JSONObject) result).getJSONArray("entity");
+        //{"companyName":"安测试公司一","companyId":12},{"companyName":"中山市小后台会计服务有限公司","companyId":13}
+                    LogHelper.i(TAG,"--------jsonArray-----"+jsonArray.toString());
+                    int length = jsonArray.length();
+
+                    for (int i=0;i<length;i++){
+                        MyCustomerMode item=new MyCustomerMode();
+                        JSONObject jsonObject= (JSONObject) jsonArray.get(i);
+                        item.setCompanyName(jsonObject.optString("companyName"));
+                        item.setCompanyId(jsonObject.optString("companyId"));
+                        companyList.add(item);
+
+                    }
+                    mMyCustomerAdapter = new MyCustomerAdapter(MyCustomerActivity.this,companyList);
+                    myCustomerList.setAdapter(mMyCustomerAdapter);
+                    LogHelper.i(TAG,"--------jsonArray-----"+jsonArray.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
-
             @Override
             public void onError(Object e) {
 
