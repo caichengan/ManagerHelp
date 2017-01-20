@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/heji"
+                style="@style/TextSize"
+                android:text="合计税额(单位/元)："
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/mTaxTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text=""
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/mAllTotalTax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/heji"
+                android:layout_marginRight="20dp"
+                android:gravity="center_horizontal"
+                android:text="0000"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="35sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.001dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/darker_gray" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/mQYSDtax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text=""
+                style="@style/TextSize"
+                android:textSize="16sp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="企业所得税："
+                android:textSize="16sp"
+                style="@style/TextSize"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textView4" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="应纳增值税："
+                style="@style/TextSize"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/mAddTax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text=""
+                style="@style/TextSize"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.001dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextSize"
+                    android:text="自开票收入：" />
+
+                <TextView
+                    android:textSize="15sp"
+                    android:id="@+id/mZKPtax"
+                    style="@style/TextSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextSize"
+                    android:text="税局代开票收入："
+                    android:id="@+id/textView5" />
+
+                <TextView
+                    android:id="@+id/mSJDKPtax"
+                    style="@style/TextSize"
+                    android:text="" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextSize"
+
+                    android:text="无票收入：" />
+
+                <TextView
+                    android:id="@+id/mWPSRtax"
+                    style="@style/TextSize"
+                    android:text="" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/usually"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        style="@style/TextSize"
+                        android:text="上期留抵：" />
+
+                    <TextView
+                        android:id="@+id/mLastStay2"
+                        style="@style/TextSize"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        style="@style/TextSize"
+                        android:text="本期销项税额度：" />
+
+                    <TextView
+                        android:id="@+id/mCurrentOutTax2"
+                        style="@style/TextSize"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        style="@style/TextSize"
+                        android:text="本期进项税额度：" />
+
+                    <TextView
+                        android:id="@+id/mCurrentInTax2"
+                        style="@style/TextSize"
+                        android:text="" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    style="@style/TextSize"
+                    android:textSize="15sp"
+                    android:text="合计收入：" />
+
+                <TextView
+                    android:textSize="15sp"
+                    style="@style/TextSize"
+                    android:id="@+id/mTotaltax"
+                    android:text="" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.0001dp"
+            android:layout_margin="15dp"
+            android:background="@android:color/darker_gray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/TextSize"
+                android:layout_marginLeft="10dp"
+
+                android:gravity="center_vertical"
+                android:text="附加税："
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/mAdditionTax"
+                style="@style/TextSize"
+                android:layout_marginRight="19dp"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textSize="16sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="19dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.0001dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    style="@style/TextSize"
+                    android:text="城市维护建设税：" />
+
+                <TextView
+                  style="@style/TextSize"
+                    android:id="@+id/mCityMaintainTax"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    style="@style/TextSize"
+                    android:text="地方教育附加税：" />
+
+                <TextView
+                    android:id="@+id/mLocoalTeachTax"
+
+                    style="@style/TextSize"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    style="@style/TextSize"
+                    android:text="城市教育附加税：" />
+
+                <TextView
+                    android:id="@+id/mCityTeachTax"
+                    style="@style/TextSize"
+                    android:text="" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.001dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray" />
+
+
+
+        <LinearLayout
+            android:id="@+id/mSocialBiao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="社保"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            >
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/mTax"
+                android:layout_alignParentRight="true"
+                android:text="报税人："
+                style="@style/TextSize"/>
+
+            <TextView
+                android:id="@+id/mTaxName"
+                android:layout_toRightOf="@id/mTax"
+                android:text="蔡程安"
+                android:layout_marginRight="20dp"
+               style="@style/TextSize"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!--小规模-->
+</LinearLayout>

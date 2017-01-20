@@ -83,7 +83,13 @@
         <activity android:name=".MyCustomerDetialActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait"/>
+        <activity android:name=".OrderPictureActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
 
+        <activity android:name=".SpaceImageDetailActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name=".provider.DatabaseHelpProvider"

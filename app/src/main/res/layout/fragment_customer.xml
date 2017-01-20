@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -11,13 +12,20 @@
             android:id="@+id/addCustomer"
             android:layout_width="wrap_content"
             android:src="@mipmap/ic_launcher"
+            android:clickable="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-
-    <ListView
-        android:id="@+id/contactsListView"
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/mListCustomer"
+            android:layout_width="match_parent"
+            android:divider="#00000000"
+            android:scrollbars="none"
+            android:layout_height="match_parent" />
+    </com.baoyz.widget.PullRefreshLayout>
 </LinearLayout>

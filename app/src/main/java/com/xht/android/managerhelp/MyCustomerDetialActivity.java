@@ -33,7 +33,7 @@ public class MyCustomerDetialActivity extends FragmentActivity {
     private static final String TAG = "MyCustomerDetialActivity";
     private android.support.v4.app.Fragment mFragment1, mFragment2, mFragment3,mFragment4,mFragment5,mFragment6;
 
-    private static final String[] CONTENT = new String[] { "订单列表", "跟进记录", "详细信息", "图片", "联系人", "报税记录"};
+    private static final String[] CONTENT = new String[] { "订单列表", "跟进记录", "详细信息", "图片", "报税记录", "联系人"};
     private SharedPreferences mSHaredPreference;
     private String companyName;
     public String phone;
@@ -79,8 +79,9 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         mFragment2= FollowFragment.newInstance(""+companyId,""+companyName);
         mFragment3= DetailFragment.newInstance(""+companyId,""+companyName);
         mFragment4= PictureFragment.newInstance(""+companyId,""+companyName);
-        mFragment5= CustomerContactsFragment.newInstance(""+companyId,""+companyName);
-        mFragment6= DeclareTaxFragment.newInstance(""+companyId,""+companyName);
+        mFragment5= DeclareTaxFragment.newInstance(""+companyId,""+companyName);
+        mFragment6= CustomerContactsFragment.newInstance(""+companyId,""+companyName);
+
 
         mListFragment.add(mFragment1);
         mListFragment.add(mFragment2);

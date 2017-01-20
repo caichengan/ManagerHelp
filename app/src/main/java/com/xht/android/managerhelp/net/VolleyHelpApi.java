@@ -1159,15 +1159,188 @@ public class VolleyHelpApi extends BaseApi{
 	 * @param orderId
 	 * @param apiListener
      */
-	public void getOrderDetials(final String orderId, final APIListener apiListener) {
+	public void getOrderDetials(final String orderId,final String orderType, final APIListener apiListener) {
 		String strUrl=MakeURL(DETIALS_ORDER_URL,new LinkedHashMap<String, Object>(){{
-			put("orderId",orderId);
+			put("orderId",orderId);//?orderId=10&orderType=10
+			put("orderType",orderType);//?orderId=10&orderType=10
 		}});
 
 		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
+				apiListener.onResult(response);
+
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+
+		App.getInstance().addToRequestQueue(reg, TAG);
+
+	}
+
+	/**
+	 * 报税记录
+	 * @param companyId
+	 * @param year
+     */
+	public void getDatasTax(final String companyId, final String year, final APIListener apiListener) {
+		String strUrl=MakeURL(DETIALS_TAX_URL,new LinkedHashMap<String, Object>(){{
+			put("companyId",companyId);
+			put("year",year);
+		}});
+
+		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
+				LogHelper.i(TAG,"--------"+response.toString());
+				apiListener.onResult(response);
+
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+
+		App.getInstance().addToRequestQueue(reg, TAG);
+
+	}
+
+
+	/**
+	 * 获取通讯录
+	 * @param companyid
+	 * @param apiListener
+     */
+	public void getContactsManager(final String companyid,  final APIListener apiListener) {
+		String strUrl=MakeURL(CONTACT_URL,new LinkedHashMap<String, Object>(){{
+			put("companyid",companyid);//?companyid=16
+		}});
+
+		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
+				LogHelper.i(TAG,"--------"+response.toString());
+				apiListener.onResult(response);
+
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+
+		App.getInstance().addToRequestQueue(reg, TAG);
+
+	}
+
+	/**
+	 * 添加成员
+	 */
+	public void postAddcontacts(JSONObject object, final APIListener apiListener) {
+		JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, ADD_CONTACTS_URL, object, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogHelper.i(TAG, response.toString());
+				if (isResponseError(response)) {
+					String errMsg = response.optString("message");
+					apiListener.onError(errMsg);
+				} else {
+
+					LogHelper.i(TAG,"------"+response.toString());
+					apiListener.onResult(response);
+				}
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙,请稍后再试...");
+			}
+		}) {
+
+		};
+		App.getInstance().addToRequestQueue(req, TAG);
+	}
+
+	/**
+	 * 获取图片
+	 */
+	public void getPictureDatas(final String orderId,  final APIListener apiListener) {
+		String strUrl=MakeURL(ORDER_PIC_URL,new LinkedHashMap<String, Object>(){{
+			put("orderId",orderId);//?companyid=16
+		}});
+
+		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
 				LogHelper.i(TAG,"--------"+response.toString());
 				apiListener.onResult(response);
 

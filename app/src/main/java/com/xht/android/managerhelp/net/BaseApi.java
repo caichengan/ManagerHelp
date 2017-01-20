@@ -91,6 +91,9 @@ public class BaseApi {
     public static final String WARNING_SURE_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/dealLowLevelWarningNotDeal";
 
 
+    //点击添加通讯录成员
+    public static final String ADD_CONTACTS_URL="";
+
     //上传图片
     public static final String LOAD_PICTURE_URL="";
 
@@ -107,9 +110,17 @@ public class BaseApi {
 
 
     //获取某个订单信息
-    public static final String DETIALS_ORDER_URL="" ;
+    public static final String DETIALS_ORDER_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadCompanyOrderDetails" ;
+
+       //获取报税记录
+    public static final String DETIALS_TAX_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadCompanyTaxDetails" ;
+
+    //获取通讯录
+    public static final String CONTACT_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadCompanyContact" ;
 
 
+    //获取d订单图片
+    public static final String ORDER_PIC_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadOrderServiceFile" ;
 
 
 
