@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="1dp"
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white">
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/TextSize"
+            android:text="姓        名:"/>
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"
+            style="@style/TextSize"
+            android:background="@android:color/transparent"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="1dp"
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white">
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/TextSize"
+            android:text="股份比例:"/>
+        <TextView
+            android:id="@+id/item_range"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"
+            style="@style/TextSize"
+            android:background="@android:color/transparent"
+            />
+        <TextView
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            style="@style/TextSize"
+            android:layout_marginLeft="5dp"
+            android:text="%"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="1dp"
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white">
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/TextSize"
+            android:text="证件号码:"/>
+        <TextView
+            android:id="@+id/item_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            style="@style/TextSize"
+            android:gravity="center_vertical"
+            android:background="@android:color/transparent"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="1dp"
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white">
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/TextSize"
+            android:layout_gravity="center_vertical"
+            android:text="证件地址:"/>
+        <TextView
+            android:id="@+id/item_address"
+            style="@style/TextSize"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:singleLine="true"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="1dp"
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white">
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/TextSize"
+            android:text="职        位:"/>
+        <TextView
+            android:id="@+id/item_worker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            style="@style/TextSize"
+            android:gravity="center_vertical"
+            android:background="@android:color/transparent"
+            />
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+
+</LinearLayout>
