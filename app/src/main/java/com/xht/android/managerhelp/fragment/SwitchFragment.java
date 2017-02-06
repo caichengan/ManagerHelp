@@ -45,7 +45,6 @@ public class SwitchFragment extends Fragment {
 	        
 		}
 	}
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -64,12 +63,9 @@ public class SwitchFragment extends Fragment {
 					
 					break;
 				case R.id.radio_txl:
-					
 					break;
 				case R.id.radio_my:
-	
 					break;
-
 				default:
 					break;
 				}

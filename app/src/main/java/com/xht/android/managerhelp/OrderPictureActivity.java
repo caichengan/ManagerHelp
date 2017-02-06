@@ -33,7 +33,6 @@ public class OrderPictureActivity extends Activity {
     private String orderId;
     private ListView listviewPic;
     private AsyncImageLoader asyncImageLoader;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,19 +49,14 @@ public class OrderPictureActivity extends Activity {
                 new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         int change = ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM;
         aBar.setDisplayOptions(change);
-
-
         Bundle bundle = getIntent().getBundleExtra("bundle");
         orderId = bundle.getString("orderId");
         LogHelper.i(TAG,"------orderId-----"+ orderId);
 
-
         if (!TextUtils.isEmpty(orderId)){
             getPictureShow();
         }
-
     }
-
     /**
      * 获取订单图片
      */
@@ -85,25 +79,18 @@ public class OrderPictureActivity extends Activity {
 // "employeeName":"安仔"},{"fileId":50,"checkStatus":"审核通过","upTime":"2016-1222 16:36:56",
 // "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395816223_bzzbz_o12_s18_e2_f1_t1482395813908_j.jpg",
 // "employeeName":"安仔"}]}
-
                 try {
                     analyize(result);
                 } catch (JSONException e) {
                     e.printStackTrace();
 
                 }
-
-
             }
-
             @Override
             public void onError(Object e) {
-
             }
         });
-
     }
-
     /**
      * 解析数据JSON
      * @param result
@@ -111,30 +98,21 @@ public class OrderPictureActivity extends Activity {
     private void analyize(Object result) throws JSONException {
 
         JSONObject JSON= (JSONObject) result;
-
         JSONArray jsonArray = JSON.optJSONArray("entity");
         List<OrderPictBean> mListEntity=new ArrayList();
-
-
         String code = JSON.optString("code");
         if (code.equals("0")){
             App.getInstance().showToast("暂无数据");
             return;
         }
-
-
         LogHelper.i(TAG,"-----length--"+ jsonArray.length());
         for (int i = 0; i < jsonArray.length(); i++) {
-
             OrderPictBean orderBean=new OrderPictBean();
             List<OrderPictBean.ProcessFileBean> mListProcessFile=new ArrayList<>();
             List<OrderPictBean.ResultFileBean> mListResultFile=new ArrayList<>();
-
             JSONObject jsonObject= (JSONObject) jsonArray.get(i);
             JSONArray process_fileArray = jsonObject.optJSONArray("process_file");
             JSONArray result_fileArray = jsonObject.optJSONArray("result_file");
-
-
             if (process_fileArray.length()>0) {
                 for (int j = 0; j < process_fileArray.length(); j++) {
                     JSONObject jsonProgress = (JSONObject) process_fileArray.get(j);
@@ -146,14 +124,12 @@ public class OrderPictureActivity extends Activity {
 
                     LogHelper.i(TAG, "----j--process_fileArray.length()----" + j + "-------" + process_fileArray.length());
                     LogHelper.i(TAG, "-----jsonProgress--" + file);
-
                     OrderPictBean.ProcessFileBean proBean = new OrderPictBean.ProcessFileBean();
                     proBean.setFileId(fileId);
                     proBean.setCheckStatus(checkStatus);
                     proBean.setUpTime(upTime);
                     proBean.setFile(file);
                     proBean.setEmployeeName(employeeName);
-
                     mListProcessFile.add(proBean);
 
                 }
@@ -170,7 +146,6 @@ public class OrderPictureActivity extends Activity {
                     String employeeName = jsonResult.optString("employeeName");
                 LogHelper.i(TAG,"----j--result_fileArray.length()----"+k+"-------"+result_fileArray.length());
                 LogHelper.i(TAG,"-----jsonResult--"+ file);
-
                     OrderPictBean.ResultFileBean resBean = new OrderPictBean.ResultFileBean();
                     resBean.setFileId(fileId);
                     resBean.setCheckStatus(checkStatus);

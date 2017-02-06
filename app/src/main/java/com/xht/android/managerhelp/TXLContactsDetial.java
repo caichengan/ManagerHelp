@@ -32,20 +32,16 @@ public class TXLContactsDetial extends Activity implements View.OnClickListener 
     private String mId;
     private String mComName;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactsdetial);
-
-
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
         name = bundle.getString("mContactName");
         phoneNum = bundle.getString("mPhone");//  bundle.putString("mId",mId);
         mId = bundle.getString("mId");
         mComName = bundle.getString("mComName");
-
         LogHelper.i(TAG,"----"+name+phoneNum+mId);
         TextView mCustomView = new TextView(this);
         mCustomView.setGravity(Gravity.CENTER);
@@ -56,15 +52,8 @@ public class TXLContactsDetial extends Activity implements View.OnClickListener 
                 new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         int change = ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM;
         aBar.setDisplayOptions(change);
-
         initialize();
-
-
-
-
     }
-
-
     @Override
     protected void onResume() {
         super.onResume();

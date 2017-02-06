@@ -49,6 +49,8 @@ public class OrderActivity extends Activity {
         bundle.putString("orderMoney",orderMoney);
         bundle.putString("orderStyle",orderStyle);
         bundle.putString("companyId",companyId);*/
+
+
         TextView mCustomView = new TextView(this);
         mCustomView.setGravity(Gravity.CENTER);
         mCustomView.setText("订单信息");

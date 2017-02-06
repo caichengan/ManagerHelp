@@ -19,12 +19,10 @@ public class OrderMapAdapter extends BaseAdapter {
 
     ArrayList<String >  arrayList;
     private Context mContext;
-
     public OrderMapAdapter(OrderActivity orderActivity, ArrayList<String > listData) {
         this.mContext=orderActivity;
         this.arrayList=listData;
     }
-
     @Override
     public int getCount() {
         if (arrayList.size()>0){
@@ -37,12 +35,10 @@ public class OrderMapAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return arrayList.get(position);
     }
-
     @Override
     public long getItemId(int position) {
         return position;
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;

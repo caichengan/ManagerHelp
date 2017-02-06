@@ -67,12 +67,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		super.onCreate(savedInstanceState);
 		mActivity= (MainActivity) getActivity();
 		userInfo = MainActivity.getInstance();
-
 		uid=userInfo.getUid();
-
 		getMainData();
 		/*pushAgent = App.getPushAgent();
-
 		//添加bu部分
 			pushAgent.getTagManager().add(new TagManager.TCallBack() {
 			@Override
@@ -81,8 +78,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 				LogHelper.i(TAG,"----isSuccess---"+isSuccess+"---uid-"+uid);
 			}
 		}, uid+"");*/
-
-
 		/*pushAgent.removeAlias(uid+"", ALIAS_TYPE_XHT, new UTrack.ICallBack() {
 			@Override
 			public void onMessage(boolean isSuccess, String message) {
@@ -90,7 +85,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 				LogHelper.i(TAG,"----addAlias---"+isSuccess+"---message-"+message);
 			}
 		});*/
-
 
 	}
 

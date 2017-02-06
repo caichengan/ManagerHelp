@@ -59,10 +59,7 @@ public class DeclareTaxFragment extends Fragment {
 
     private String[] mYears;
     private int mSelectedYear=-1;//选中的公司id
-
-
     private ProgressDialog mProgDoal;
-
     private Spinner companyTax;
     private TextView mAllTotalTax;
     private TextView mAllTotalTax2;

@@ -43,20 +43,16 @@ public class PictureFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     // TODO: Rename and change types of parameters
     private String companyId;
     private String mParam2;
     private ListView mListPicture;
-
     private List<CustomerOrderMode> mListMyCustomer;
     private PictureAdapter pictureAdapter;
     private PullRefreshLayout swipeRefreshLayout;
-
     public PictureFragment() {
         // Required empty public constructor
     }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -74,7 +70,6 @@ public class PictureFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     private static final String TAG = "PictureFragment";
 
     @Override

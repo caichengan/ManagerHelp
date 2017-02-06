@@ -30,14 +30,11 @@ public class NoManagerFragment extends Fragment {
     private TextView tvLowNotDone;
     private List<NewDataBean> mListViewDatas;
     private int mDataNumber=0;
-
     private static final String TAG = "NoManagerFragment";
     private LowWarningAdapter lowWarningAdapter;
-
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
     /*    Bundle bundle = getIntent().getBundleExtra("bundle");
         int uid = bundle.getInt("uid", -1);
         LogHelper.i(TAG,"----uid----"+uid);*/

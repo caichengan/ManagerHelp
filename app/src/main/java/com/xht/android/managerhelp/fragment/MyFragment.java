@@ -38,7 +38,6 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 	private static final String TAG = "MyFragment";
 	public static final String BRO_ACT_S = "com.xht.android.managerhelp.bro_act";
 	public static final String BRO_ACT_S2 = "com.xht.android.managerhelp.bro_act_s2";
-
 	public static final String PHONENUM_KEY = "phone_key";
 	public static final String UID_KEY = "userId_key";
 	public static final String UNAME_KEY = "userName_key";
@@ -55,9 +54,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 	private TextView banben;
 	private LinearLayout fragmmyll2;
 	private UserInfo mUserInfo;
-
 	private AsyncImageLoader imageLoader;
-
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
 		@Override
@@ -76,7 +73,6 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 			refleshUI();
 		}
 	};
-
 	private BroadcastReceiver mClearUserReceiver = new BroadcastReceiver() {
 
 		@Override

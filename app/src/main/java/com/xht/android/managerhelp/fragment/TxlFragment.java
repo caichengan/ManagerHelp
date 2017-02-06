@@ -45,7 +45,6 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
     private MainActivity mActivity;
     private TextView mClientContacts;
     private TextView mInsideContacts;
-
     private static List<SortModel> mClientList=new ArrayList<>();
     private SortAdapter mSortAdapter;
     private ClearEditText mClientEdit;
@@ -61,7 +60,6 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
 
     /** 根据拼音来排列ListView里面的数据类
      **/
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -188,7 +186,6 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
         mClientContacts.setBackgroundColor(Color.TRANSPARENT);
         mInsideContacts.setBackgroundColor(Color.TRANSPARENT);
     }
-
     //访问客户通讯录数据
     private void getTXLBarData() {
         clearBack();

@@ -25,7 +25,6 @@ public class SwitchUserDialogFragment extends DialogFragment{
     int mNum;
     Button mYesBtn, mNoBtn;
     MainActivity mActivity;
-
     /**
      * Create a new instance of MyDialogFragment, providing "num"
      * as an argument.
@@ -38,7 +37,6 @@ public class SwitchUserDialogFragment extends DialogFragment{
         args.putInt("uid", uId);
         args.putInt("num", num);
         f.setArguments(args);
-
         return f;
     }
 
@@ -50,7 +48,6 @@ public class SwitchUserDialogFragment extends DialogFragment{
         LogHelper.i("sfsg=", "-------------------" + mUId);
         int style = DialogFragment.STYLE_NO_TITLE, theme = 0;
         setStyle(style, theme);
-
     }
 
     @Override
@@ -85,7 +82,6 @@ public class SwitchUserDialogFragment extends DialogFragment{
         super.onAttach(context);
         mActivity = (MainActivity) context;
     }
-
     @Override
     public void onDetach() {
         super.onDetach();

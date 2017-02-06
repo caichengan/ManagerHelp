@@ -29,7 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginFragment extends Fragment {
-
 	private static final String TAG = "LoginFragment";
 	private Button mLoginButton;
 	TextView mButtonReg, mWangJi;
@@ -39,7 +38,6 @@ public class LoginFragment extends Fragment {
 	private UserInfo mUseInfo;
 	private String password;
 	private String pNum;
-
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -51,7 +49,6 @@ public class LoginFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		mActivity.setTitle(R.string.login_changhu);
 	}
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -104,7 +101,6 @@ public class LoginFragment extends Fragment {
 			App.getInstance().showToast("请输入手机账号");
 			return;
 		}
-
 		LogHelper.i(TAG,"-------password-"+password);
 		if (TextUtils.isEmpty(password)) {
 			App.getInstance().showToast(getResources().getString(R.string.tip_input_password));

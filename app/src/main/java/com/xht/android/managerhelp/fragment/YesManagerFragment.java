@@ -30,15 +30,11 @@ public class YesManagerFragment extends Fragment {
 	private PullRefreshLayout swipeRefreshLayout;
 	private ListView listviewLowWarning;
 	private List<NewDataBean> mListViewDatas;
-
-
 	private LowWarningAdapter lowWarningAdapter;
 	private TextView tvLowNotDone;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 	}
 
 	private static final String TAG = "YesManagerFragment";
@@ -46,10 +42,7 @@ public class YesManagerFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View inflate = inflater.inflate(R.layout.yesmanagerwarn, null);
-
-
 		listviewLowWarning = (ListView) inflate. findViewById(R.id.listviewYes);
-
 		View view = View.inflate(getActivity(), R.layout.item_text, null);
 		listviewLowWarning.addHeaderView(view);
 		tvLowNotDone= (TextView) view.findViewById(R.id.tvLowNotDone);
@@ -82,7 +75,6 @@ public class YesManagerFragment extends Fragment {
 			lowWarningAdapter.dismissPopupwindow();
 		}
 	}
-
 	public void getDataDoneLowing(){
 	mListViewDatas.clear();
 

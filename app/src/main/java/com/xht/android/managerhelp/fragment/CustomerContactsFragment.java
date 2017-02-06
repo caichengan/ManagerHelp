@@ -80,9 +80,7 @@ public class CustomerContactsFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     private static final String TAG = "CustomerContactsFragmen";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
