@@ -185,7 +185,8 @@ public class CustomerContactsFragment extends Fragment {
 
         JSONObject object=new JSONObject();
         try {
-            object.put("telphone",""+phone);
+            object.put("companyId",""+companyId);
+            object.put("contactTel",""+phone);
             object.put("contactName",""+name);
 
 
@@ -199,7 +200,8 @@ public class CustomerContactsFragment extends Fragment {
             @Override
             public void onResult(Object result) {
 
-
+                // TODO 添加通讯录
+                LogHelper.i(TAG,"----------"+result.toString());
 
             }
 
@@ -208,14 +210,11 @@ public class CustomerContactsFragment extends Fragment {
 
             }
         });
-
     }
-
     /**
      * 从网上获取通讯录
      */
     private void getOrderDatas() {
-
       //  mListMyCustomer.clear();
 
         LogHelper.i(TAG,"-----getContactsManager---");

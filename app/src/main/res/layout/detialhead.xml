@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_marginTop="1dp"
+        android:padding="3dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="注册资金： "
+            style="@style/TextSize"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/TextSize"
+            android:layout_height="match_parent"
+            />
+        <TextView
+            android:id="@+id/textMoney"
+            style="@style/TextSize"
+            android:layout_width="wrap_content"
+            android:text="   "
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="    万"
+            style="@style/detialTextMessage" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:padding="3dp"
+        android:visibility="gone"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="股份比例： "
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+        <TextView
+            android:id="@+id/textGufeng"
+            android:layout_width="wrap_content"
+            android:text=" 0"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="    %"
+            android:layout_marginRight="5dp"
+
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_marginTop="1dp"
+        android:padding="3dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="公司类型： "
+            style="@style/TextSize"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/textStyle"
+            android:text="自然独资"
+            style="@style/detialTextMessage" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_marginTop="1dp"
+        android:padding="3dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/TextSize"
+            android:text="经营范围： "
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/view2" />
+
+        <TextView
+            android:id="@+id/textRange"
+            android:text="自然独资"
+            style="@style/detialTextMessage" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:layout_marginTop="1dp"
+        android:padding="3dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="经营地址： "
+            style="@style/TextSize"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/textAddress"
+            android:text="自然独资"
+            style="@style/detialTextMessage" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:text="成员信息"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="4dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

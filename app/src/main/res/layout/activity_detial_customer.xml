@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:background="@android:color/holo_green_dark" >
+         >
     </com.viewpagerindicator.TabPageIndicator>
 
     <android.support.v4.view.ViewPager

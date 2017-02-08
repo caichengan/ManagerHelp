@@ -2,6 +2,7 @@ package com.xht.android.managerhelp;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -14,7 +15,6 @@ import com.xht.android.managerhelp.mode.OrderPictAdapter;
 import com.xht.android.managerhelp.mode.OrderPictBean;
 import com.xht.android.managerhelp.net.APIListener;
 import com.xht.android.managerhelp.net.VolleyHelpApi;
-import com.xht.android.managerhelp.util.AsyncImageLoader;
 import com.xht.android.managerhelp.util.LogHelper;
 
 import org.json.JSONArray;
@@ -26,13 +26,15 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/1/18.
+ *
+ * 订单图片查看
  */
 
 public class OrderPictureActivity extends Activity {
     private static final String TAG = "OrderPictureActivity";
     private String orderId;
     private ListView listviewPic;
-    private AsyncImageLoader asyncImageLoader;
+    private ProgressDialog mProgDoal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,20 +67,20 @@ public class OrderPictureActivity extends Activity {
         VolleyHelpApi.getInstance().getPictureDatas(orderId, new APIListener() {
             @Override
             public void onResult(Object result) {
-//{"process_file":[{"fileId":45,"checkStatus":"审核通过","upTime":"2016-1222 16:07:11",
-// "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482394031826_bzzbz_o12_s18_e2_f1_t1482394019881_g.jpg",
-// "employeeName":"安仔"},{"fileId":47,"checkStatus":"审核通过","upTime":"2016-1222 16:36:22",
-// "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395782772_bzzbz_o12_s18_e2_f1_t1482395758950_g.jpg",
-// "employeeName":"安仔"},{"fileId":48,"checkStatus":"审核通过","upTime":"2016-1222 16:36:28",
-// "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395788446_bzzbz_o12_s18_e2_f1_t1482395764263_g.jpg",
-// "employeeName":"安仔"}],"flowName":"资料交接","result_file":[{"fileId":46,"checkStatus":"审核通过",
-// "upTime":"2016-1222 16:17:56",
-// "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482394676733_bzzbz_o12_s18_e2_f1_t1482394613018_j.jpg",
-// "employeeName":"安仔"},{"fileId":49,"checkStatus":"审核通过","upTime":"2016-1222 16:36:48",
-// "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395808873_bzzbz_o12_s18_e2_f1_t1482395810731_j.jpg",
-// "employeeName":"安仔"},{"fileId":50,"checkStatus":"审核通过","upTime":"2016-1222 16:36:56",
-// "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395816223_bzzbz_o12_s18_e2_f1_t1482395813908_j.jpg",
-// "employeeName":"安仔"}]}
+/*{"process_file":[{"fileId":45,"checkStatus":"审核通过","upTime":"2016-1222 16:07:11",
+"file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482394031826_bzzbz_o12_s18_e2_f1_t1482394019881_g.jpg",
+ "employeeName":"安仔"},{"fileId":47,"checkStatus":"审核通过","upTime":"2016-1222 16:36:22",
+ "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395782772_bzzbz_o12_s18_e2_f1_t1482395758950_g.jpg",
+ "employeeName":"安仔"},{"fileId":48,"checkStatus":"审核通过","upTime":"2016-1222 16:36:28",
+ "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395788446_bzzbz_o12_s18_e2_f1_t1482395764263_g.jpg",
+ "employeeName":"安仔"}],"flowName":"资料交接","result_file":[{"fileId":46,"checkStatus":"审核通过",
+ "upTime":"2016-1222 16:17:56",
+ "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482394676733_bzzbz_o12_s18_e2_f1_t1482394613018_j.jpg",
+ "employeeName":"安仔"},{"fileId":49,"checkStatus":"审核通过","upTime":"2016-1222 16:36:48",
+ "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395808873_bzzbz_o12_s18_e2_f1_t1482395810731_j.jpg",
+ "employeeName":"安仔"},{"fileId":50,"checkStatus":"审核通过","upTime":"2016-1222 16:36:56",
+ "file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1482395816223_bzzbz_o12_s18_e2_f1_t1482395813908_j.jpg",
+ "employeeName":"安仔"}]}*/
                 try {
                     analyize(result);
                 } catch (JSONException e) {
@@ -171,29 +173,43 @@ public class OrderPictureActivity extends Activity {
         // "flowName":"资料交接",
         // "result_file":[{"fileId":74,"checkStatus":"审核通过","upTime":"2017-0104 11:30:50","file":"http:\/\/www.xiaohoutai.com.cn:8888\/XHT\/servicefileController\/downLoadServiceFile?fileName=1483500650236_bzzbz_o3_s4_e8_f1_t1483500647887_j.jpg","employeeName":"覃源源"}]}],"code":"1"}
 
-
-
-
         LogHelper.i(TAG,"-----------------------------");
 
         OrderPictAdapter adapter=new OrderPictAdapter(this,mListEntity,listviewPic);
 
         listviewPic.setAdapter(adapter);
-
-
-
         LogHelper.i(TAG,"----------22222222----------");
 
     }
-
-
+    /**
+     * 创建对话框
+     *
+     * @param title
+     */
+    private void createProgressDialog(String title) {
+        if (mProgDoal == null) {
+            mProgDoal = new ProgressDialog(this);
+        }
+        mProgDoal.setTitle(title);
+        mProgDoal.setIndeterminate(true);
+        mProgDoal.setCancelable(false);
+        mProgDoal.show();
+    }
+    /**
+     * 隐藏对话框
+     */
+    private void dismissProgressDialog() {
+        if (mProgDoal != null) {
+            mProgDoal.dismiss();
+            mProgDoal = null;
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
-
             default:
                 break;
         }

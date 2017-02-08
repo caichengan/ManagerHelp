@@ -44,6 +44,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 	private LinearLayout lLayout03;
 	private TextView lowNumber;
 	private TextView permitNumber;
+	private TextView myCustomer;
 	private LinearLayout lLayout04;
 	private LinearLayout lLayout05;
 	private LinearLayout lLayout06;
@@ -53,6 +54,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 	//private PushAgent pushAgent;
 
 	public  static String ALIAS_TYPE_XHT="com.xht.android.managerhelp";
+	private String myCustomerCountCountToday;
 
 	/*@Override
 	public void onAttach(Activity activity) {
@@ -68,23 +70,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		mActivity= (MainActivity) getActivity();
 		userInfo = MainActivity.getInstance();
 		uid=userInfo.getUid();
-		getMainData();
-		/*pushAgent = App.getPushAgent();
-		//添加bu部分
-			pushAgent.getTagManager().add(new TagManager.TCallBack() {
-			@Override
-			public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
-				//isSuccess表示操作是否成功
-				LogHelper.i(TAG,"----isSuccess---"+isSuccess+"---uid-"+uid);
-			}
-		}, uid+"");*/
-		/*pushAgent.removeAlias(uid+"", ALIAS_TYPE_XHT, new UTrack.ICallBack() {
-			@Override
-			public void onMessage(boolean isSuccess, String message) {
 
-				LogHelper.i(TAG,"----addAlias---"+isSuccess+"---message-"+message);
-			}
-		});*/
+
 
 	}
 
@@ -104,7 +91,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 				public void onResult(Object result) {
 
 					LogHelper.i(TAG, "------11首页的所有信息--");
-					LogHelper.i(TAG, "------11首页的所有信息--" + result.toString());
+					LogHelper.i(TAG, "------11--首页的所有信息--" + result.toString());
 					//{"yw":0,"bz":0,"yj":3}
 					//JSONObject JSONOB= (JSONObject) result;
 					//{"message":"系统错误","result":"error","entity":null,"code":"0"}
@@ -118,18 +105,19 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 					if (code.equals("0")){
 						LogHelper.i(TAG, "-----if-shouye--" + result.toString());
 						return;
-					}else {
+					}else {//{"orderCount":0,"myCustomerCount":25,"permitCount":0,"receivablesCount":0,"lowLevelWarning":0,"achievementPermit":0}
 						LogHelper.i(TAG, "----else--shouye--" + result.toString());
 						JSONObject JSONOB = ((JSONObject) result).optJSONObject("entity");
-						receivablesCountToday = JSONOB.optString("receivablesCountToday");
-						orderCountToday = JSONOB.optString("orderCountToday");
-						permitStepCountToday = JSONOB.optString("permitStepCountToday");
-						lowLevelWarningNotDealCount = JSONOB.optString("lowLevelWarningNotDealCount");
-						achievementPermitCountToday = JSONOB.optString("achievementPermitCountToday");
+						receivablesCountToday = JSONOB.optString("receivablesCount");
+						orderCountToday = JSONOB.optString("orderCount");
+						permitStepCountToday = JSONOB.optString("permitCount");
+						lowLevelWarningNotDealCount = JSONOB.optString("lowLevelWarning");
+						achievementPermitCountToday = JSONOB.optString("achievementPermit");
+						myCustomerCountCountToday = JSONOB.optString("myCustomerCount");
 
 
 						LogHelper.i(TAG, "----所有信息--" + receivablesCountToday + orderCountToday + permitStepCountToday+lowLevelWarningNotDealCount+achievementPermitCountToday);
-						App.getInstance().showToast("----所有信息--" + receivablesCountToday + orderCountToday + permitStepCountToday+lowLevelWarningNotDealCount+achievementPermitCountToday);
+						//App.getInstance().showToast("----所有信息--" + receivablesCountToday + orderCountToday + permitStepCountToday+lowLevelWarningNotDealCount+achievementPermitCountToday);
 						uDpateDataMethod();
 					}
 				}
@@ -157,6 +145,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		lLayout04.setOnClickListener(this);
 		lLayout05.setOnClickListener(this);
 		lLayout06.setOnClickListener(this);
+
+		getMainData();
 		return view;
 	}
 	@Override
@@ -214,6 +204,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		lLayout03 = (LinearLayout) view.findViewById(R.id.lLayout03);
 		lowNumber = (TextView) view.findViewById(R.id.lowNumber);
 		permitNumber = (TextView) view.findViewById(R.id.permitNumber);
+		myCustomer = (TextView) view.findViewById(R.id.myCustomer);
 		lLayout04 = (LinearLayout) view.findViewById(R.id.lLayout04);
 		lLayout05 = (LinearLayout) view.findViewById(R.id.lLayout05);
 		lLayout06 = (LinearLayout) view.findViewById(R.id.lLayout06);
@@ -226,6 +217,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		stepNumber.setText(permitStepCountToday);
 		lowNumber.setText(lowLevelWarningNotDealCount);
 		permitNumber.setText(achievementPermitCountToday);
+		myCustomer.setText(myCustomerCountCountToday);
 	}
 	boolean isUserLogin() {
 		if (userInfo.getUid() == 0) {

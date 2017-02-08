@@ -80,12 +80,15 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".MyCustomerDetialActivity"
+        <activity
+            android:name=".MyCustomerDetialActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".OrderPictureActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            />
 
         <activity android:name=".SpaceImageDetailActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"

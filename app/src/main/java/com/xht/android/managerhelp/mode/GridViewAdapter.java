@@ -36,6 +36,7 @@ public class GridViewAdapter extends BaseAdapter {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext).build();
         imageLoader = ImageLoader.getInstance(); // Get singleton instance
         imageLoader.init(config);
+
     }
 
     public List<OrderPictBean.ProcessFileBean> getmListProcess() {
@@ -47,26 +48,19 @@ public class GridViewAdapter extends BaseAdapter {
 
     }
 
-
-
     @Override
     public int getCount() {
         return mListProcess.size();
     }
-
     @Override
     public Object getItem(int position) {
-
-
         return position;
-
-
     }
-
-
     @Override
     public long getItemId(int position) {
+
         return position;
+
     }
 
 
@@ -95,6 +89,7 @@ public class GridViewAdapter extends BaseAdapter {
         //首先得到要设置的GridView
         holder.iv.setTag(file);
         if(holder.iv.getTag()!=null&&holder.iv.getTag().equals(file)){
+
             imageLoader.displayImage(file,imageAware);
 
         }

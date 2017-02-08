@@ -63,10 +63,6 @@ public class MyCustomerActivity extends Activity{
         LogHelper.i(TAG,"----uid----"+ uid);
         companyList = new ArrayList<MyCustomerMode>();
         initialize();
-
-
-
-
     }
 
     @Override
@@ -87,12 +83,10 @@ public class MyCustomerActivity extends Activity{
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void initialize() {
 
         myCustomerList = (ListView) findViewById(R.id.myCustomerList);
         swipeRefreshLayout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-
 
         myCustomerList.setFastScrollEnabled(true);
         layout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -107,13 +101,10 @@ public class MyCustomerActivity extends Activity{
                         // 刷新3秒完成
                         App.getInstance().showToast("刷新完成");
 
-
-
                     }
                 }, 3000);
             }
         });
-
         layout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
 
         myCustomerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -123,7 +114,6 @@ public class MyCustomerActivity extends Activity{
                 MyCustomerMode myCustomerMode = companyList.get(position);
                 String companyName = myCustomerMode.getCompanyName();
                 String companyId = myCustomerMode.getCompanyId();
-
                 Bundle bundle=new Bundle();
                 bundle.putString("companyName",companyName);
                 bundle.putString("companyId",companyId);

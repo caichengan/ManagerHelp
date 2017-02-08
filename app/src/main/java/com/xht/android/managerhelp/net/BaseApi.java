@@ -14,12 +14,8 @@ public class BaseApi {
     //检查更新
 	public static final String CHECK_VERSION_URL = "http://www.xiaohoutai.com.cn:8888/XHT/business/ApkmanagerController/updateApkVersion";
 
-
-
-
     //首页数据
-
-    public static final String MAIN_URL = "http://www.xiaohoutai.com.cn:8888/XHT/employeeController/firstPageInfo";
+    public static final String MAIN_URL = "http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadMainPageCount";
 
     //通讯录客户
     public static final String CONTACTSPOST_URL = "http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadMailListCustomer";
@@ -92,7 +88,7 @@ public class BaseApi {
 
 
     //点击添加通讯录成员
-    public static final String ADD_CONTACTS_URL="";
+    public static final String ADD_CONTACTS_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/addNewContact";
 
     //上传图片
     public static final String LOAD_PICTURE_URL="";
@@ -121,6 +117,9 @@ public class BaseApi {
 
     //获取d订单图片
     public static final String ORDER_PIC_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadOrderServiceFile" ;
+
+    //获取人员头像和图片
+    public static final String NUMBER_PIC_URL="" ;
 
 
 

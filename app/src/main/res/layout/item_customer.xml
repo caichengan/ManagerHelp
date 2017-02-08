@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:padding="10dp"
             android:text="公司"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

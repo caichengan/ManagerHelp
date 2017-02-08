@@ -11,7 +11,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.viewpagerindicator.TabPageIndicator;
@@ -21,6 +24,14 @@ import com.xht.android.managerhelp.fragment.DetailFragment;
 import com.xht.android.managerhelp.fragment.FollowFragment;
 import com.xht.android.managerhelp.fragment.OrderFragment;
 import com.xht.android.managerhelp.fragment.PictureFragment;
+import com.xht.android.managerhelp.net.APIListener;
+import com.xht.android.managerhelp.net.VolleyHelpApi;
+import com.xht.android.managerhelp.util.BitmapUtils;
+import com.xht.android.managerhelp.util.LogHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +54,7 @@ public class MyCustomerDetialActivity extends FragmentActivity {
     private String orderId;
     private String companyId;
     private String customerName;
+    private LinearLayout mLLayout;
 
     @Override
     protected void onResume() {
@@ -62,7 +74,6 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         Bundle bundle = getIntent().getBundleExtra("bundle");
         companyName = bundle.getString("companyName");
         companyId = bundle.getString("companyId");
-
 
         TextView mCustomView = new TextView(this);
         mCustomView.setGravity(Gravity.CENTER);
@@ -100,11 +111,28 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         ViewPager pager = (ViewPager)findViewById(R.id.framelayout);
         pager.setAdapter(adapter);
 
+        mLLayout = (LinearLayout) findViewById(R.id.containLLayout);
+
         final TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.indicator);
+        indicator.setBackgroundColor(R.drawable.btn_background_circle);
+       // android:background="@drawable/btn_background_circle"
         indicator.setViewPager(pager);
 
-   /*     final TitlePageIndicator indicator = (TitlePageIndicator)findViewById(R.id.indicator);
+
+        loadDataPs();//TODO 客户头像和姓名
+
+     /*   final TitlePageIndicator indicator = (TitlePageIndicator)findViewById(R.id.indicator);
         indicator.setViewPager(pager);*/
+
+     /*   final float density = getResources().getDisplayMetrics().density;
+        indicator.setBackgroundColor(0x18FF0000);
+        indicator.setFooterColor(0xFFAA2222);
+        indicator.setFooterLineHeight(1 * density); //1dp
+        indicator.setFooterIndicatorHeight(3 * density); //3dp
+        indicator.setFooterIndicatorStyle(TitlePageIndicator.IndicatorStyle.Underline);
+        indicator.setTextColor(0x00000);
+        indicator.setSelectedColor(0x000000);
+        indicator.setSelectedBold(true);*/
 
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -116,20 +144,14 @@ public class MyCustomerDetialActivity extends FragmentActivity {
             public void onPageSelected(int position) {
 
                 indicator.setCurrentItem(position);
-
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
-
     }
-
     class NewsAdapter extends FragmentPagerAdapter {
         public NewsAdapter(FragmentManager fm) {
-
             super(fm);
         }
         @Override
@@ -137,7 +159,6 @@ public class MyCustomerDetialActivity extends FragmentActivity {
             //新建一个Fragment来展示ViewPager item的内容，并传递参数
             return mListFragment.get(position);
         }
-
         @Override
         public CharSequence getPageTitle(int position) {
             return CONTENT[position % CONTENT.length].toUpperCase();
@@ -148,12 +169,11 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         }
     }
 
-
     /**
      * 办证中获取成员数据
      */
-  /*  private void loadDataPs() {
-        VolleyHelpApi.getInstance().getDataBZChengYuan(mOrderId, new APIListener() {
+    private void loadDataPs() {
+        VolleyHelpApi.getInstance().getDataBZChengYuan(orderId, new APIListener() {
             @Override
             public void onResult(Object result) {
 
@@ -167,11 +187,9 @@ public class MyCustomerDetialActivity extends FragmentActivity {
                         String employeeName = obj.optString("employeeName");
                         LogHelper.i(TAG,"-----headportrait-"+headportrait);
 
-                        View view = View.inflate(RwxqActivity.this,R.layout.item_bz_chengyuan,null);//TODO 添加头像
-                        textName = (TextView) view.findViewById(R.id.chengyuanName);
-                        textImg = (ImageView) view.findViewById(R.id.touxiang);
-
-
+                        View view = View.inflate(MyCustomerDetialActivity.this,R.layout.item_bz_chengyuan,null);//TODO 添加头像
+                        TextView textName = (TextView) view.findViewById(R.id.chengyuanName);
+                        ImageView textImg = (ImageView) view.findViewById(R.id.touxiang);
 
                         textName.setText(employeeName);
                         BitmapUtils.loadImgageUrl(headportrait,textImg);
@@ -190,7 +208,7 @@ public class MyCustomerDetialActivity extends FragmentActivity {
                 App.getInstance().showToast(e.toString());
             }
         });
-    }*/
+    }
 
     public void createProgressDialog(String title) {
         if (mProgDoal == null) {

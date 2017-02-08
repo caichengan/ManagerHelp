@@ -9,12 +9,6 @@ import java.util.List;
 public class OrderPictBean {
 
 
-    /**
-     * process_file : [{"fileId":73,"checkStatus":"审核通过","upTime":"2017-0104 11:30:34","file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1483500634108_bzzbz_o3_s4_e8_f1_t1483500631936_g.jpg","employeeName":"覃源源"}]
-     * flowName : 资料交接
-     * result_file : [{"fileId":74,"checkStatus":"审核通过","upTime":"2017-0104 11:30:50","file":"http://www.xiaohoutai.com.cn:8888/XHT/servicefileController/downLoadServiceFile?fileName=1483500650236_bzzbz_o3_s4_e8_f1_t1483500647887_j.jpg","employeeName":"覃源源"}]
-     */
-
     private String flowName;
     private List<ProcessFileBean> process_file;
     private List<ResultFileBean> result_file;

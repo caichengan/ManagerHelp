@@ -54,7 +54,6 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 	private TextView banben;
 	private LinearLayout fragmmyll2;
 	private UserInfo mUserInfo;
-	private AsyncImageLoader imageLoader;
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
 		@Override

@@ -40,16 +40,6 @@ public class GridViewResAdapter extends BaseAdapter {
         imageLoader.init(config);
     }
 
-    public void setmResultList(List<OrderPictBean.ResultFileBean> result_file) {
-
-        this.mListResult=mListResult;
-    }
-
-    public List<OrderPictBean.ResultFileBean> getmListResult() {
-        return mListResult;
-    }
-
-
     @Override
     public int getCount() {
         return mListResult.size();
@@ -57,20 +47,13 @@ public class GridViewResAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-
-
         return position;
-
-
     }
-
 
     @Override
     public long getItemId(int position) {
         return position;
     }
-
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -84,14 +67,14 @@ public class GridViewResAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        //设置图片内容，本例木有图片
-//        holder.iv.setImageResource(getItem(position));
 
      /*   BitmapUtils.loadImgageUrl(mListResult.get(position),holder.iv);*/
 
         String file = mListResult.get(position).getFile();
         LogHelper.i(TAG,"---111111111111-url-----"+file);
-
+        /**
+         * 解决图片重复闪烁的问题
+         */
         ImageAware imageAware =new ImageViewAware(holder.iv,false);
         //首先得到要设置的GridView
         holder.iv.setTag(file);

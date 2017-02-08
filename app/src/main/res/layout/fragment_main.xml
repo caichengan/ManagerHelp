@@ -23,10 +23,13 @@
                 <TextView
                     android:id="@+id/orderNumber"
                     android:layout_width="50dp"
-                    android:layout_height="35dp"
+
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="15dp"
                     android:text="0"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
+                    android:textColor="@android:color/holo_blue_dark"
                     android:gravity="center"
                     />
                 <TextView
@@ -34,7 +37,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/newcustomer_str"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/darker_gray"
                     android:padding="8dip"
                     />
             </LinearLayout>
@@ -54,8 +58,11 @@
                 <TextView
                     android:id="@+id/moneyNumber"
                     android:layout_width="50dp"
-                    android:layout_height="35dp"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
+                    android:textColor="@android:color/holo_orange_light"
                     android:text="0"
+
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="15dp"
@@ -66,7 +73,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/getmoney_str"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/darker_gray"
                     android:padding="8dip"
                     />
             </LinearLayout>
@@ -89,7 +97,9 @@
                 <TextView
                     android:id="@+id/stepNumber"
                     android:layout_width="50dp"
-                    android:layout_height="35dp"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
+                    android:textColor="@android:color/holo_green_dark"
                     android:text="0"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
@@ -102,8 +112,9 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/banzhengnum_str"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:padding="8dip"
+                    android:textColor="@android:color/darker_gray"
                     android:id="@+id/textView" />
             </LinearLayout>
 
@@ -121,7 +132,9 @@
                 <TextView
                     android:id="@+id/lowNumber"
                     android:layout_width="50dp"
-                    android:layout_height="35dp"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
+                    android:textColor="@android:color/holo_red_dark"
                     android:text="0"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
@@ -134,7 +147,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/lownum_str"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/darker_gray"
                     android:padding="8dip"/>
             </LinearLayout>
         </TableRow>
@@ -153,7 +167,9 @@
                 <TextView
                     android:id="@+id/permitNumber"
                     android:layout_width="50dp"
-                    android:layout_height="35dp"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
+                    android:textColor="@android:color/holo_purple"
                     android:text="0"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
@@ -166,7 +182,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/banzhengyeji_str"
                     android:padding="8dip"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/darker_gray"
                     android:gravity="center"
                     android:id="@+id/textView2" />
             </LinearLayout>
@@ -185,7 +202,8 @@
                 <TextView
                     android:id="@+id/myCustomer"
                     android:layout_width="50dp"
-                    android:layout_height="35dp"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
                     android:text="0"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
@@ -197,7 +215,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/mycustomer"
                     android:padding="8dip"
-                    android:textSize="15sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="13sp"
                     android:gravity="center"
                     />
             </LinearLayout>

@@ -59,7 +59,7 @@ public class VolleyHelpApi extends BaseApi{
 		App.getInstance().addToRequestQueue(req, TAG);
 	}
 
-	//
+	//获取主页数据
 	public void getMainData(final int uid, final APIListener apiListener) {
 		String urlS = MakeURL(MAIN_URL, new LinkedHashMap<String, Object>() {
 
@@ -1252,6 +1252,51 @@ public class VolleyHelpApi extends BaseApi{
 	public void getContactsManager(final String companyid,  final APIListener apiListener) {
 		String strUrl=MakeURL(CONTACT_URL,new LinkedHashMap<String, Object>(){{
 			put("companyid",companyid);//?companyid=16
+		}});
+
+		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
+				LogHelper.i(TAG,"--------"+response.toString());
+				apiListener.onResult(response);
+
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+
+		App.getInstance().addToRequestQueue(reg, TAG);
+
+	}
+
+	/**
+	 * 获取成员信息头像和姓名
+	 * @param orderId
+	 * @param apiListener
+     */
+
+	public void getDataBZChengYuan(final String orderId,  final APIListener apiListener) {
+		String strUrl=MakeURL(NUMBER_PIC_URL,new LinkedHashMap<String, Object>(){{
+			put("orderId",orderId);//?orderId=16
 		}});
 
 		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {

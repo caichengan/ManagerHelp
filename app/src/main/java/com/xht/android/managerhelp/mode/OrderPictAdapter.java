@@ -71,8 +71,6 @@ public class OrderPictAdapter extends BaseAdapter {
             holder.gridviewProcess = (NoScrollGridView)convertView. findViewById(R.id.gridviewProcess);
             holder.gridviewResult = (NoScrollGridView) convertView.findViewById(R.id.gridviewResult);
             holder.result = (TextView)convertView. findViewById(R.id.result);
-
-
             convertView.setTag(holder);
 
         }else{
@@ -89,10 +87,7 @@ public class OrderPictAdapter extends BaseAdapter {
         LogHelper.i(TAG,"-------result_file.size()----"+result_file.size());
 
         holder.styleName.setText(entity.get(position).getFlowName());
-
-
         //定义gridView的数据源
-
         adapter = new GridViewAdapter(mContext,entity.get(position).getProcess_file());
         holder.gridviewProcess.setAdapter(adapter);
 
@@ -100,8 +95,7 @@ public class OrderPictAdapter extends BaseAdapter {
         holder.gridviewResult.setAdapter(adapterRes);
 
         //将adapter定义在此，优化滑动效果(核心)
-
-                holder.gridviewProcess.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        holder.gridviewProcess.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int Childposition, long id) {
                         //App.getInstance().showToast("这是第"+position+"个item");

@@ -118,6 +118,9 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
+
+
+
         initialize(view);
 
         if (companyId!=null) {
@@ -130,20 +133,22 @@ public class DetailFragment extends Fragment {
 
     private void initialize(View view) {
 
+        View viewHead = View.inflate(getActivity(),R.layout.detialhead,null);
         btnChange = (Button) view.findViewById(R.id.btnChange);
         textComName = (TextView) view.findViewById(R.id.textComName);
         editComName = (EditText) view.findViewById(R.id.editComName);
         textClientName = (TextView) view.findViewById(R.id.textClientName);
         textPhone = (TextView) view.findViewById(R.id.textPhone);
         textSex = (TextView) view.findViewById(R.id.textSex);
-        textMoney = (TextView) view.findViewById(R.id.textMoney);
-        textGufeng = (TextView) view.findViewById(R.id.textGufeng);
-        textStyle = (TextView) view.findViewById(R.id.textStyle);
-        textRange = (TextView) view.findViewById(R.id.textRange);
-        textAddress = (TextView) view.findViewById(R.id.textAddress);
+        textMoney = (TextView) viewHead.findViewById(R.id.textMoney);
+        textGufeng = (TextView) viewHead.findViewById(R.id.textGufeng);
+        textStyle = (TextView) viewHead.findViewById(R.id.textStyle);
+        textRange = (TextView) viewHead.findViewById(R.id.textRange);
+        textAddress = (TextView) viewHead.findViewById(R.id.textAddress);
         mEmployee = (ListView) view.findViewById(R.id.mEmployee);
 
 
+        mEmployee.addHeaderView(viewHead);
 
     }
 
