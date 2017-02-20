@@ -9,8 +9,8 @@ android {
         applicationId "com.xht.android.managerhelp"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 111
-        versionName "1.11"
+        versionCode 118
+        versionName "1.18"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -22,7 +22,6 @@ android {
             storePassword 'xiaohoutaicca'
         }
     }
-
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/LICENSE.txt'

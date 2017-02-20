@@ -18,8 +18,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -147,22 +151,33 @@ public class Utils {
 		return jsonObject;		
 	}
 
+	public static String getTimes(String time){
+		DateFormat formatter=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date date=null;
+		try {
+			date=formatter.parse(time);
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		GregorianCalendar calendar=new GregorianCalendar();
+		calendar.setTime(date);
+		return calendar.get(Calendar.YEAR)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.DAY_OF_MONTH);
+	}
+
 	public static byte[] httpGet(String url) {
 		try {
-
 			URL urlT = new URL(url);
-
 			HttpURLConnection connection = (HttpURLConnection) urlT.openConnection();
-
 			connection.setReadTimeout(10000 /* milliseconds */);
 			connection.setConnectTimeout(15000 /* milliseconds */);
 			connection.setRequestMethod("GET");
 			connection.setDoInput(true);
 			// Start the query
 			connection.connect();
-
 			LogHelper.e(TAG, "HttpURLConnection.HTTP_OK前1");
-
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				LogHelper.e(TAG, "httpGet fail, status code = " + connection.getResponseCode());
 				return null;
@@ -222,7 +237,12 @@ public class Utils {
 			return null;
 		}
 	}
-	
+
+	/**
+	 * 毫秒转换具体时间
+	 * @param now
+	 * @return
+     */
 	public static String getTimeUtils(long now) {
 		/*DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		//long now = System.currentTimeMillis();
@@ -231,8 +251,6 @@ public class Utils {
 		return formatter.format(calendar.getTime());*/
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         return sd.format(new Date(now));
-
-
     }
 
 	/**

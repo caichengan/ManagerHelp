@@ -90,11 +90,24 @@ public class BaseApi {
     //点击添加通讯录成员
     public static final String ADD_CONTACTS_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/addNewContact";
 
+    //提交指定搜索的公司
+    public static final String SEARCH_URL="";
+
+    //访问办证中列表
+    public static final String CERTIFICATE_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadPermitingDataList";
+
+
+    //访问记账中列表
+    public static final String TALLYING_URL="";
+
     //上传图片
     public static final String LOAD_PICTURE_URL="";
 
     //获取所有的公司所有信息
     public static final String GET_MYCUSTOMER_URL="http://www.xiaohoutai.com.cn:8888/XHT/employeeController/loadAllCompanyInfo" ;
+
+    //获取所有的过期公司所有信息
+    public static final String GET_OUTCOMPANY_URL="http://www.xiaohoutai.com.cn:8888/XHT/accountorderController/accountExpire" ;
 
 
 

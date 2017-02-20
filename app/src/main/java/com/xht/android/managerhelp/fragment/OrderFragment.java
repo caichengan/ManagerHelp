@@ -123,7 +123,7 @@ public class OrderFragment extends Fragment {
                         item.setCompanyId(jsonObject.optString("companyId"));
                         item.setOrderId(jsonObject.optString("orderid"));
                         item.setOrderMoney(jsonObject.optString("orderFee"));
-                        item.setOrderEndTime(jsonObject.optString("placeOrderTime"));
+                        item.setOrderStartTime(jsonObject.optString("placeOrderTime"));
                         mListOrderDatas.add(item);
 
 
@@ -199,10 +199,5 @@ public class OrderFragment extends Fragment {
 
         return view;
     }
-
-
-
-
-
 }
 

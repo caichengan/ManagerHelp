@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;

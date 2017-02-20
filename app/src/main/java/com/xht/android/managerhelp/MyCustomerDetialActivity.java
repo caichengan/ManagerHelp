@@ -53,8 +53,10 @@ public class MyCustomerDetialActivity extends FragmentActivity {
     private List<android.support.v4.app.Fragment> mListFragment;
     private String orderId;
     private String companyId;
-    private String customerName;
+    private String countyName;
     private LinearLayout mLLayout;
+    private TextView mCompanyName;
+    private TextView mCompanyAddress;
 
     @Override
     protected void onResume() {
@@ -74,10 +76,12 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         Bundle bundle = getIntent().getBundleExtra("bundle");
         companyName = bundle.getString("companyName");
         companyId = bundle.getString("companyId");
+        countyName= bundle.getString("countyName");
+        orderId= bundle.getString("orderId");
 
         TextView mCustomView = new TextView(this);
         mCustomView.setGravity(Gravity.CENTER);
-        mCustomView.setText(companyName+"");
+        mCustomView.setText("");
         mCustomView.setTextColor(Color.BLACK);
         mCustomView.setTextSize(18);
         final ActionBar aBar = getActionBar();
@@ -111,7 +115,14 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         ViewPager pager = (ViewPager)findViewById(R.id.framelayout);
         pager.setAdapter(adapter);
 
-        mLLayout = (LinearLayout) findViewById(R.id.containLLayout);
+       // mLLayout = (LinearLayout) findViewById(R.id.containLLayout);
+        mCompanyName = (TextView) findViewById(R.id.MyCompanyName);
+        mCompanyAddress = (TextView) findViewById(R.id.MyCompanyAddress);
+
+
+        mCompanyName.setText(companyName);
+
+        mCompanyAddress.setText(countyName);
 
         final TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.indicator);
         indicator.setBackgroundColor(R.drawable.btn_background_circle);
@@ -119,7 +130,7 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         indicator.setViewPager(pager);
 
 
-        loadDataPs();//TODO 客户头像和姓名
+       // loadDataPs();//TODO 客户头像和姓名
 
      /*   final TitlePageIndicator indicator = (TitlePageIndicator)findViewById(R.id.indicator);
         indicator.setViewPager(pager);*/
@@ -169,9 +180,9 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         }
     }
 
-    /**
+  /*  *//**
      * 办证中获取成员数据
-     */
+     *//*
     private void loadDataPs() {
         VolleyHelpApi.getInstance().getDataBZChengYuan(orderId, new APIListener() {
             @Override
@@ -208,7 +219,7 @@ public class MyCustomerDetialActivity extends FragmentActivity {
                 App.getInstance().showToast(e.toString());
             }
         });
-    }
+    }*/
 
     public void createProgressDialog(String title) {
         if (mProgDoal == null) {

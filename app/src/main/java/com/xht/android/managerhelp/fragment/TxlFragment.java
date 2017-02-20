@@ -206,7 +206,11 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
                         String contactName = JsonItem.optString("contactName");
                         String telephone = JsonItem.optString("telephone");//起始步骤
                         String companyName = JsonItem.optString("companyName");//起始步骤
-                        item.setName(contactName);
+                        if (contactName.equals("null")){
+                            item.setName(telephone);
+                        }else {
+                            item.setName(contactName);
+                        }
                         item.setPhoneNum(telephone);
                         item.setCompanyName(companyName);
                         item.setId(id);
@@ -247,6 +251,10 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
                         String employeeName = JsonItem.optString("employeeName");
                         String telephone = JsonItem.optString("telephone");//起始步骤
                         String companyName = JsonItem.optString("companyName");//起始步骤
+                        LogHelper.i(TAG,"------employeeName--"+employeeName);
+
+
+
                         item.setName(employeeName);
                         item.setPhoneNum(telephone);
                         item.setCompanyName(companyName);
@@ -275,10 +283,11 @@ public class TxlFragment extends Fragment implements View.OnClickListener {
         String[] date = new String[len];
         Log.i(TAG, "----len-" + len);
         for (int i = 0; i < len; i++) {
-            date[i] = mClientList.get(i).getName()+"_"+mClientList.get(i).getCompanyName()+"_"+mClientList.get(i).getPhoneNum();
 
-            LogHelper.i(TAG,"--------"+i+"--"+mClientList.get(i).getId());
-            LogHelper.i(TAG,"-------date-"+i+"--"+date[i].toString());
+                date[i] = mClientList.get(i).getName() + "_" + mClientList.get(i).getCompanyName() + "_" + mClientList.get(i).getPhoneNum();
+
+                LogHelper.i(TAG, "--------" + i + "--" + mClientList.get(i).getId());
+                LogHelper.i(TAG, "-------date-" + i + "--" + date[i].toString());
         }
 
 

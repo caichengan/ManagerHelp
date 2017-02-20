@@ -3,9 +3,6 @@ package com.xht.android.managerhelp;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,30 +30,29 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/1/5.
  *
- * 我的客户页面
+ * 我的过期客户页面
  */
-public class MyCustomerActivity extends Activity{
+public class OutCustomerActivity extends Activity{
 
     private int uid;
 
-    private static final String TAG = "MyCustomerActivity";
+    private static final String TAG = "OutCustomerActivity";
     private ListView myCustomerList;
-    private ClearEditText mClearCustomer;
     private PullRefreshLayout swipeRefreshLayout;
     private MyCustomerAdapter mMyCustomerAdapter;
     private PullRefreshLayout layout;
     private List<MyCustomerMode> companyList;
-    private List<MyCustomerMode> searchCompanyList;
+    private ClearEditText clearCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_mycustomer);
+        setContentView(R.layout.activity_outcustomer);
 
         TextView mCustomView = new TextView(this);
         mCustomView.setGravity(Gravity.CENTER);
-        mCustomView.setText("我的客户");
+        mCustomView.setText("到期合同");
         mCustomView.setTextSize(18);
         final ActionBar aBar = getActionBar();
         aBar.setCustomView(mCustomView,
@@ -68,7 +64,7 @@ public class MyCustomerActivity extends Activity{
         uid = bundle.getInt("uid", -1);
         LogHelper.i(TAG,"----uid----"+ uid);
         companyList = new ArrayList<MyCustomerMode>();
-        searchCompanyList=new ArrayList<>();
+
         initialize();
     }
 
@@ -93,70 +89,24 @@ public class MyCustomerActivity extends Activity{
     private void initialize() {
 
         myCustomerList = (ListView) findViewById(R.id.myCustomerList);
-        mClearCustomer = (ClearEditText) findViewById(R.id.mClearCustomer);
-        swipeRefreshLayout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        clearCustomer = (ClearEditText) findViewById(R.id.mClearCustomer);
 
-        myCustomerList.setFastScrollEnabled(true);
-        layout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        final PullRefreshLayout layout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 layout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        layout.setRefreshing(false);
-                        //getTaskBarData();
+
                         // 刷新3秒完成
-                        getMyCuetomer();
-                        App.getInstance().showToast("刷新完成");
-
-
+                        layout.setRefreshing(false);
                     }
                 }, 3000);
             }
         });
-        layout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
 
-        mClearCustomer.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                String mNewCustomString = mClearCustomer.getText().toString();
-
-                if (!TextUtils.isEmpty(mNewCustomString)){
-
-                    JSONObject object=new JSONObject();
-
-                    try {
-                        object.put("name",mNewCustomString);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-
-                    }
-                    LogHelper.i(TAG,"----"+object);
-                    for (int i = 0; i < companyList.size(); i++) {
-                        boolean contains = companyList.get(i).getCompanyName().contains(mNewCustomString);
-                        if (contains){
-                            searchCompanyList.add(companyList.get(i));
-                        }
-                    }
-                    mMyCustomerAdapter = new MyCustomerAdapter(MyCustomerActivity.this,searchCompanyList);
-                    myCustomerList.setAdapter(mMyCustomerAdapter);
-                }else{
-                    getMyCuetomer();
-                }
-            }
-        });
+        myCustomerList.setFastScrollEnabled(true);
 
         myCustomerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -165,29 +115,23 @@ public class MyCustomerActivity extends Activity{
                 MyCustomerMode myCustomerMode = companyList.get(position);
                 String companyName = myCustomerMode.getCompanyName();
                 String companyId = myCustomerMode.getCompanyId();
-                String countyName = myCustomerMode.getCountyName();
                 Bundle bundle=new Bundle();
                 bundle.putString("companyName",companyName);
                 bundle.putString("companyId",companyId);
-                bundle.putString("countyName",countyName);
-                IntentUtils.startActivityNumber(MyCustomerActivity.this,bundle,MyCustomerDetialActivity.class);
+                IntentUtils.startActivityNumber(OutCustomerActivity.this,bundle,MyCustomerDetialActivity.class);
 
             }
         });
 
-        getMyCuetomer();
+        getMyOutCuetomer();
     }
 
-
-
     /**
-     * 获取所有的客户信息
+     * 获取所有的过期客户信息
      */
-    private void getMyCuetomer() {
+    private void getMyOutCuetomer() {
 
-        companyList.clear();
-        searchCompanyList.clear();
-        VolleyHelpApi.getInstance().getDatasFromCustomer(new APIListener() {
+        VolleyHelpApi.getInstance().getOutFromCustomer(new APIListener() {
             @Override
             public void onResult(Object result) {
                 JSONArray jsonArray= null;
@@ -204,11 +148,11 @@ public class MyCustomerActivity extends Activity{
                         JSONObject jsonObject= (JSONObject) jsonArray.get(i);
                         item.setCompanyName(jsonObject.optString("companyName"));
                         item.setCompanyId(jsonObject.optString("companyId"));
-                        item.setCountyName(jsonObject.optString("countyName"));
+                        item.setDataOut(jsonObject.optString("dataOut"));
                         companyList.add(item);
 
                     }
-                    mMyCustomerAdapter = new MyCustomerAdapter(MyCustomerActivity.this,companyList);
+                    mMyCustomerAdapter = new MyCustomerAdapter(OutCustomerActivity.this,companyList);
                     myCustomerList.setAdapter(mMyCustomerAdapter);
                     LogHelper.i(TAG,"--------jsonArray-----"+jsonArray.toString());
                 } catch (JSONException e) {

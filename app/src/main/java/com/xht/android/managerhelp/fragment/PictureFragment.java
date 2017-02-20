@@ -146,6 +146,7 @@ public class PictureFragment extends Fragment {
             public void onResult(Object result) {
                 //{"message":"没有订单","result":"error","entity":null,"code":"0"}
                 JSONObject object = (JSONObject) result;
+                LogHelper.i(TAG, "-----pic---onResult-" +object.toString());
 
                 String code = object.optString("code");
                 if (code.equals("0")){
@@ -154,11 +155,12 @@ public class PictureFragment extends Fragment {
                     return;
                 }
 
-                LogHelper.i(TAG, "--------onResult-" );
+
 
 //{"businezzType":"10","placeOrderTime":"2017-01-11 14:19:46","starttime":"1484115586316",
 // "orderName":"注册公司","hasAccount":"N","companyId":84,"orderid":"67","companyName":"测试公司了","orderFee":"1"}
-
+//[{"businezzType":"10","placeOrderTime":"2017-01-04 15:49:52","starttime":"1483516192977","orderName":"注册公司",
+// "hasAccount":"Y","companyId":30,"orderid":"13","companyName":"滚滚红","orderFee":"1"}
                 JSONArray jsonArray = object.optJSONArray("entity");
                 int length = jsonArray.length();
                 try {
@@ -167,11 +169,14 @@ public class PictureFragment extends Fragment {
                         JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                         CustomerOrderMode item = new CustomerOrderMode();
                         item.setOrderStyle(jsonObject.optString("orderName"));
+                        String businezzType = jsonObject.optString("businezzType");
+                        item.setBusinezzType(businezzType);
                         item.setOrderMoney(jsonObject.optString("orderFee"));
                         item.setOrderId((jsonObject.optString("orderid")));
-                        item.setOrderEndTime(jsonObject.optString("placeOrderTime"));
-                        mListMyCustomer.add(item);
-
+                        item.setOrderStartTime(jsonObject.optString("placeOrderTime"));
+                        if (businezzType.equals("10")){//现在只加注册公司
+                            mListMyCustomer.add(item);
+                        }
 
                     }
                 } catch (JSONException e) {

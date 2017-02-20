@@ -67,6 +67,8 @@ public class OrderActivity extends Activity {
         orderMoney = bundle.getString("orderMoney");
         orderStyle = bundle.getString("orderStyle");
         companyId = bundle.getString("companyId");
+        //{"businezzType":"11","placeOrderTime":"2016-12-15 15:25:37","starttime":"1481786737429",
+        // "orderName":"记账报税","hasAccount":"N","companyId":20,"orderid":"6","companyName":"中山市贯道电器有限公司","orderFee":"1"}],"code":"1"}
         LogHelper.i(TAG,"-----onCreate--"+orderId+orderMoney+orderStyle+companyId);
         listView = (ListView) findViewById(R.id.listView);
       /*  Map<String,String> map=new HashMap<String,String>();
@@ -88,25 +90,44 @@ public class OrderActivity extends Activity {
             @Override
             public void onResult(Object result) {////?orderId=10&orderType=10
                 LogHelper.i(TAG,"------onResult---"+result.toString());
-
-
                 if (businezzType.equals("10")) {
-
-                  JSONObject jsonObject= (JSONObject) result;
+                    JSONObject jsonObject= (JSONObject) result;
                     String entity = jsonObject.optString("entity");
-
                     Map<String, Object> map = getMap(entity);
+                    if (map.size()>0) {
 
-                    for(Map.Entry<String,Object> m:map.entrySet()){
-                        LogHelper.i(TAG,"--------key------:" + m.getKey() + " value" + m.getValue());
-                        listData.add(m.getKey() + "" + ":  " + m.getValue() + "");
+                        for (Map.Entry<String, Object> m : map.entrySet()) {
+                            LogHelper.i(TAG, "--------key------:" + m.getKey() + " value" + m.getValue());
+                            listData.add(m.getKey() + "" + ":  " + m.getValue() + "");
+
+                        }
+
+                        adapter = new OrderMapAdapter(OrderActivity.this, listData);
+                        listView.setAdapter(adapter);
 
                     }
 
-                    adapter = new OrderMapAdapter(OrderActivity.this, listData);
-                    listView.setAdapter(adapter);
+                    //{"抢单编号":8,"抢单电话":"18938723410","备选名称":"","支付单号":3,"镇区编号":1,"下单电话":"13531829360","镇区名称":"石岐区","支付状态":"已付款","下单人员":"有限公司","下单编号":1,"记账单号":1,"服务状态":"服务中","抢单时间":"2016-12-15 15:30:31","公司名称":"破天","抢单人员":"覃源源",
+                    // "是否加急":"否","订单金额":"￥0.01","地址托管":"否","含有记账":"是","下单时间":"2016-12-14 10:12:24","订单编号":3}
+                    // JSONObject jsonObject= ((JSONObject) result).optJSONObject("entity");
+                    //  LogHelper.i(TAG,"------onResult---"+jsonObject.toString());
+                }
+                if (businezzType.equals("11")) {//代理记账
+                    JSONObject jsonObject= (JSONObject) result;
+                    String entity = jsonObject.optString("entity");
+                    Map<String, Object> map = getMap(entity);
+                    if (map.size()>0) {
 
+                        for (Map.Entry<String, Object> m : map.entrySet()) {
+                            LogHelper.i(TAG, "--------key------:" + m.getKey() + " value" + m.getValue());
+                            listData.add(m.getKey() + "" + ":  " + m.getValue() + "");
 
+                        }
+
+                        adapter = new OrderMapAdapter(OrderActivity.this, listData);
+                        listView.setAdapter(adapter);
+
+                    }
 
                     //{"抢单编号":8,"抢单电话":"18938723410","备选名称":"","支付单号":3,"镇区编号":1,"下单电话":"13531829360","镇区名称":"石岐区","支付状态":"已付款","下单人员":"有限公司","下单编号":1,"记账单号":1,"服务状态":"服务中","抢单时间":"2016-12-15 15:30:31","公司名称":"破天","抢单人员":"覃源源",
                     // "是否加急":"否","订单金额":"￥0.01","地址托管":"否","含有记账":"是","下单时间":"2016-12-14 10:12:24","订单编号":3}
@@ -114,13 +135,13 @@ public class OrderActivity extends Activity {
                     //  LogHelper.i(TAG,"------onResult---"+jsonObject.toString());
                 }
                 if (businezzType.equals("12")){//社保服务
-                    /**
-                     *  /**
+                   /* *
+                     *  *
                      * {"person":[{"身份证号":"dfvxscgggexcffsdv","人员姓名":"某某","购买/撤销":"撤销"},{"身份证号":"451278966547887758","人员姓名":"购买","购买/撤销":"购买"},
                      * {"身份证号":"78548857455878","人员姓名":"撤销","购买/撤销":"撤销"}],
                      * "order":{"支付状态":"已付款","下单人员":"韦继胜","OptType":null,"抢单电话":null,"服务状态":"预约中","抢单时间":null,"抢单人员":null,"公司名称":"韦继胜测试公司3","订单金额":"￥1","下单电话":"13531833516","下单时间":"2017-01-16 11:05:13"}}
-                     */
 
+*/
 
 
                 JSONObject object= (JSONObject) result;

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xht.android.managerhelp.R;
+import com.xht.android.managerhelp.util.Utils;
 
 import java.util.List;
 
@@ -61,12 +62,12 @@ public class PictureAdapter extends BaseAdapter {
 
         CustomerOrderMode myCustomerMode = mListCustomer.get(position);
         String picStyle = myCustomerMode.getOrderStyle();
-        String picTime = myCustomerMode.getOrderEndTime();
+        String picTime = myCustomerMode.getOrderStartTime();
         String picMoney = myCustomerMode.getOrderMoney();
 
         holder.picStyle.setText(picStyle);
         holder.picMoney.setText(picMoney);
-        holder.picTime.setText(picTime);
+        holder.picTime.setText(Utils.getTimes(picTime));
 
 
         return convertView;

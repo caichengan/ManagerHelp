@@ -220,7 +220,6 @@ public class NewAddCustomerActivity extends Activity implements View.OnClickList
                 tvNewCustomer.setText(""+mListViewDatas.size());
                 addCustomerAdapter.notifyDataSetChanged();
 
-
             }
             @Override
             public void onError(Object e) {

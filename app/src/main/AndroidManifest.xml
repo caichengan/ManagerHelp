@@ -94,6 +94,19 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".OutCustomerActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".CertificateListActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".TallyListActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+
+
         <provider
             android:name=".provider.DatabaseHelpProvider"
             android:authorities="com.xht.android.managerhelp.DatabaseHelpProvider"

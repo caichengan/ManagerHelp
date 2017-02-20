@@ -9,20 +9,34 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@android:color/white"
+        android:gravity="center"
         android:layout_height="70dp">
-        <HorizontalScrollView
-            android:id="@+id/chengyuan"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <LinearLayout
-                android:id="@+id/containLLayout"
+
+
+            <TextView
+                android:text="公司名"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
 
-            </LinearLayout>
-        </HorizontalScrollView>
+                android:textSize="20dp"
+
+                android:gravity="center"
+                android:id="@+id/MyCompanyName" />
+     <!--   android:id="@+id/MyCompanyAddress"-->
+
+        <TextView
+            android:text="区域"
+            android:id="@+id/MyCompanyAddress"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/holo_red_light"
+            android:padding="5dp"
+            android:layout_height="wrap_content" />
+
+
+
     </RelativeLayout>
 
     <com.viewpagerindicator.TabPageIndicator

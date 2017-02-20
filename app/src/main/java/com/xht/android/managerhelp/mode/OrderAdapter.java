@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xht.android.managerhelp.R;
+import com.xht.android.managerhelp.util.Utils;
 
 import java.util.List;
 
@@ -67,14 +68,16 @@ public class OrderAdapter extends BaseAdapter {
 
         CustomerOrderMode OrderMode = orderList.get(position);
 
+
+
         String orderStyle = OrderMode.getOrderStyle();
         String orderMoney = OrderMode.getOrderMoney();
-        String orderEndTime = OrderMode.getOrderEndTime();
+        String orderStartTime = OrderMode.getOrderStartTime();
 
 
         holder.orderStyle.setText(orderStyle);
         holder.orderMoney.setText(orderMoney);
-        holder.orderTime.setText(orderEndTime);
+        holder.orderTime.setText(Utils.getTimes(orderStartTime));
 
         return convertView;
     }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/tallying_com"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="公司:"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tallying_mCompany"
+            android:layout_width="wrap_content"
+            android:text="大斧头哥到"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tallying_account"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tallying_com"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:text="会记:"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tallying_mName"
+            android:layout_width="wrap_content"
+            android:text="大斧头哥到"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+   
+    <TextView
+        android:id="@+id/tallying_mAddress"
+        android:layout_below="@id/tallying_com"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:textSize="15sp"
+        android:layout_margin="5dp"
+        android:text="东区"
+        android:drawableLeft="@mipmap/company_address"
+        android:layout_height="wrap_content"
+        />
+
+</RelativeLayout>

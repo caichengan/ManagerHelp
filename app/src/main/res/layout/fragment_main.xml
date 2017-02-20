@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -198,7 +201,6 @@
                 android:layout_margin="2dp"
                 android:orientation="vertical"
                 >
-
                 <TextView
                     android:id="@+id/myCustomer"
                     android:layout_width="50dp"
@@ -209,7 +211,6 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="15dp"
                     />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -222,6 +223,111 @@
             </LinearLayout>
         </TableRow>
 
-    </TableLayout>
+        <TableRow>
+            <LinearLayout
+                android:id="@+id/lLayout07"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="2dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/OutNumber"
+                    android:layout_width="50dp"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
+                    android:textColor="@android:color/holo_blue_bright"
+                    android:text="0"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/banzhengout"
+                    android:padding="8dip"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:gravity="center"
+                     />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lLayout08"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="2dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/permittingCount"
+                    android:layout_width="50dp"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
+                    android:text="0"
+                    android:gravity="center"
+                    android:textColor="@color/colorGray"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dip"
+                    android:text="办证中"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:id="@+id/lLayout09"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="2dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/TallyNumber"
+                    android:layout_width="50dp"
+                    android:textSize="40dp"
+                    android:layout_height="55dp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:text="0"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tallying"
+                    android:padding="8dip"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lLayout10"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:layout_margin="2dp"
+                android:orientation="vertical"
+                >
 
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+    </ScrollView>
 </LinearLayout>

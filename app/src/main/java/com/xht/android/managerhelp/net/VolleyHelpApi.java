@@ -11,17 +11,21 @@ import org.json.JSONObject;
 
 import java.util.LinkedHashMap;
 
-public class VolleyHelpApi extends BaseApi{
+public class VolleyHelpApi extends BaseApi {
 	private static final String TAG = "VolleyHelpApi";
-	
+
 	private static VolleyHelpApi sVolleyHelpApi;
+
 	public static synchronized VolleyHelpApi getInstance() {
 		if (sVolleyHelpApi == null) {
 			sVolleyHelpApi = new VolleyHelpApi();
 		}
 		return sVolleyHelpApi;
 	}
-	private VolleyHelpApi() {}
+
+	private VolleyHelpApi() {
+	}
+
 	/**
 	 * 检查版本更新 getCheckVersion
 	 */
@@ -31,9 +35,9 @@ public class VolleyHelpApi extends BaseApi{
 		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogHelper.i(TAG,"-----------"+ response.toString());
-					JSONObject jsonObject = response.optJSONObject("entity");
-					apiListener.onResult(response);
+				LogHelper.i(TAG, "-----------" + response.toString());
+				JSONObject jsonObject = response.optJSONObject("entity");
+				apiListener.onResult(response);
 
 			}
 		}, new Response.ErrorListener() {
@@ -59,17 +63,20 @@ public class VolleyHelpApi extends BaseApi{
 		App.getInstance().addToRequestQueue(req, TAG);
 	}
 
-	//获取主页数据
-	public void getMainData(final int uid, final APIListener apiListener) {
-		String urlS = MakeURL(MAIN_URL, new LinkedHashMap<String, Object>() {
 
-		});
-		LogHelper.i(TAG, urlS);
-		JsonObjectRequest req = new JsonObjectRequest(urlS, null, new Response.Listener<JSONObject>() {
+	/**
+	 * 访问办证列表数据
+	 * @param apiListener
+	 */
+	public void getCertificateListData(final int uid, final APIListener apiListener) {
+		String urlString = MakeURL(CERTIFICATE_URL, new LinkedHashMap<String, Object>() {{
+		}});
+		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogHelper.i(TAG, "-------"+response.toString());//{"message":"系统错误","result":"error","entity":null,"code":"0"}
-					apiListener.onResult(response);
+				LogHelper.i(TAG, response.toString());
+				LogHelper.i(TAG, "-----预警-的所有信息--" + response.toString());
+				apiListener.onResult(response);
 			}
 		}, new Response.ErrorListener() {
 			@Override
@@ -93,13 +100,51 @@ public class VolleyHelpApi extends BaseApi{
 		});
 		App.getInstance().addToRequestQueue(req, TAG);
 	}
-	private boolean isResponseError(JSONObject jb){
-		String errorCode = jb.optString("code","0");
-		if(errorCode.equals("1")){
+
+
+	//获取主页数据
+	public void getMainData(final int uid, final APIListener apiListener) {
+		String urlS = MakeURL(MAIN_URL, new LinkedHashMap<String, Object>() {
+
+		});
+		LogHelper.i(TAG, urlS);
+		JsonObjectRequest req = new JsonObjectRequest(urlS, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogHelper.i(TAG, "-------" + response.toString());//{"message":"系统错误","result":"error","entity":null,"code":"0"}
+				apiListener.onResult(response);
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+		App.getInstance().addToRequestQueue(req, TAG);
+	}
+
+	private boolean isResponseError(JSONObject jb) {
+		String errorCode = jb.optString("code", "0");
+		if (errorCode.equals("1")) {
 			return false;
-		}		
+		}
 		return true;
 	}
+
 	/**
 	 * 登录提交
 	 */
@@ -114,7 +159,7 @@ public class VolleyHelpApi extends BaseApi{
 				} else {
 
 					JSONObject jsonObject = response.optJSONObject("entity");
-					LogHelper.i(TAG,"------"+response.toString());
+					LogHelper.i(TAG, "------" + response.toString());
 					apiListener.onResult(jsonObject);
 				}
 			}
@@ -144,7 +189,6 @@ public class VolleyHelpApi extends BaseApi{
 	}
 
 
-
 	/**
 	 * 修改账户提交确认
 	 */
@@ -159,7 +203,7 @@ public class VolleyHelpApi extends BaseApi{
 				} else {
 
 					JSONObject jsonObject = response.optJSONObject("entity");
-					LogHelper.i(TAG,"----entity--"+response.toString());
+					LogHelper.i(TAG, "----entity--" + response.toString());
 					apiListener.onResult(jsonObject);
 				}
 			}
@@ -202,7 +246,7 @@ public class VolleyHelpApi extends BaseApi{
 				} else {
 
 					JSONObject jsonObject = response.optJSONObject("entity");
-					LogHelper.i(TAG,"----entity--"+response.toString());
+					LogHelper.i(TAG, "----entity--" + response.toString());
 					apiListener.onResult(jsonObject);
 				}
 			}
@@ -232,31 +276,29 @@ public class VolleyHelpApi extends BaseApi{
 	}
 
 
-	
 	public static String MakeURL(String p_url, LinkedHashMap<String, Object> params) {
 		StringBuilder url = new StringBuilder(p_url);
-		if(url.indexOf("?")<0)
+		if (url.indexOf("?") < 0)
 			url.append('?');
 
-		for(String name : params.keySet()){
+		for (String name : params.keySet()) {
 			url.append('&');
 			url.append(name);
 			url.append('=');
 			url.append(String.valueOf(params.get(name)));
 		}
 		String temStr = url.toString().replace("?&", "?");
-		
+
 		return temStr;
 	}
 
 
-
-
 	/**
 	 * 访问客户通讯录数据
+	 *
 	 * @param apiListener
 	 */
-	public void getTXLData( final APIListener apiListener) {
+	public void getTXLData(final APIListener apiListener) {
 		String urlString = MakeURL(CONTACTSPOST_URL, new LinkedHashMap<String, Object>() {{
 		}});
 		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
@@ -293,11 +335,13 @@ public class VolleyHelpApi extends BaseApi{
 		});
 		App.getInstance().addToRequestQueue(req, TAG);
 	}
+
 	/**
 	 * 访问内部通讯录数据
+	 *
 	 * @param apiListener
 	 */
-	public void getTXLInsideData( final APIListener apiListener) {
+	public void getTXLInsideData(final APIListener apiListener) {
 		String urlString = MakeURL(CONTACTS_GONGSI_URL, new LinkedHashMap<String, Object>() {{
 		}});
 		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
@@ -338,9 +382,10 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 访问订单量（本日）
+	 *
 	 * @param apiListener
 	 */
-	public void getNewAddCustomerDay( final APIListener apiListener) {
+	public void getNewAddCustomerDay(final APIListener apiListener) {
 		String urlString = MakeURL(ORDER_DAY_URL, new LinkedHashMap<String, Object>() {{
 		}});
 		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
@@ -381,9 +426,10 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 访问订单量（本周）
+	 *
 	 * @param apiListener
 	 */
-	public void getNewAddCustomerWeek( final APIListener apiListener) {
+	public void getNewAddCustomerWeek(final APIListener apiListener) {
 		String urlString = MakeURL(ORDER_WEEk_URL, new LinkedHashMap<String, Object>() {{
 		}});
 		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
@@ -424,9 +470,10 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 访问订单量（本月）
+	 *
 	 * @param apiListener
 	 */
-	public void getNewAddCustomerMonth( final APIListener apiListener) {
+	public void getNewAddCustomerMonth(final APIListener apiListener) {
 		String urlString = MakeURL(ORDER_MONTH_URL, new LinkedHashMap<String, Object>() {{
 		}});
 		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
@@ -466,9 +513,10 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 本日收款量
+	 *
 	 * @param apiListener
-     */
-	public void getMoneyDay( final APIListener apiListener) {
+	 */
+	public void getMoneyDay(final APIListener apiListener) {
 		String urlString = MakeURL(MONEY_DAY_URL, new LinkedHashMap<String, Object>() {{
 		}});
 		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
@@ -509,8 +557,9 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * b本周收款
+	 *
 	 * @param apiListener
-     */
+	 */
 	public void getMoneyWeek(final APIListener apiListener) {
 		String urlString = MakeURL(MONEY_WEEk_URL, new LinkedHashMap<String, Object>() {{
 		}});
@@ -552,9 +601,10 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 本月收款量
+	 *
 	 * @param apiListener
-     */
-	public void getMoneyMonth( final APIListener apiListener) {
+	 */
+	public void getMoneyMonth(final APIListener apiListener) {
 		String urlString = MakeURL(MONEY_MONTH_URL, new LinkedHashMap<String, Object>() {{
 		}});
 		JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
@@ -877,7 +927,7 @@ public class VolleyHelpApi extends BaseApi{
 					apiListener.onError(errMsg);
 				} else {
 
-					LogHelper.i(TAG,"------"+response.toString());
+					LogHelper.i(TAG, "------" + response.toString());
 					apiListener.onResult(response);
 				}
 			}
@@ -1028,7 +1078,7 @@ public class VolleyHelpApi extends BaseApi{
 	 */
 	public void getDatasFromCustomer(final APIListener apiListener) {
 
-		String strurl=MakeURL(GET_MYCUSTOMER_URL,new LinkedHashMap<String, Object>(){{
+		String strurl = MakeURL(GET_MYCUSTOMER_URL, new LinkedHashMap<String, Object>() {{
 
 		}});
 
@@ -1037,8 +1087,8 @@ public class VolleyHelpApi extends BaseApi{
 			public void onResponse(JSONObject response) {
 				LogHelper.i(TAG, response.toString());
 
-					LogHelper.i(TAG, "------entity--" + response.toString());
-					apiListener.onResult(response);
+				LogHelper.i(TAG, "------entity--" + response.toString());
+				apiListener.onResult(response);
 
 			}
 		}, new Response.ErrorListener() {
@@ -1064,14 +1114,50 @@ public class VolleyHelpApi extends BaseApi{
 		App.getInstance().addToRequestQueue(req, TAG);
 	}
 
-	public void postSaveCompanyName(JSONObject obj, APIListener apiListener) {
+	/**
+	 * 获取所有的过期客户公司信息
+	 */
+	public void getOutFromCustomer(final APIListener apiListener) {
 
+		String strurl = MakeURL(GET_OUTCOMPANY_URL, new LinkedHashMap<String, Object>() {{
 
+		}});
 
+		JsonObjectRequest req = new JsonObjectRequest(strurl, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogHelper.i(TAG, response.toString());
+
+				LogHelper.i(TAG, "------entity--" + response.toString());
+				apiListener.onResult(response);
+
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+		App.getInstance().addToRequestQueue(req, TAG);
 	}
 
 	/**
 	 * 获取公司信息和人员信息
+	 *
 	 * @param companyid
 	 * @param apiListener
 	 */
@@ -1111,20 +1197,21 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 获取客户订单数据
+	 *
 	 * @param companyid
 	 * @param apiListener
-     */
+	 */
 	public void getOrderListDatas(final String companyid, final APIListener apiListener) {
 //{"message":"没有订单","result":"error","entity":null,"code":"0"}
-		String strUrl=MakeURL(CUSTOMER_ORDER_URL,new LinkedHashMap<String, Object>(){{
-			put("companyid",companyid);
+		String strUrl = MakeURL(CUSTOMER_ORDER_URL, new LinkedHashMap<String, Object>() {{
+			put("companyid", companyid);
 		}});
 
-		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+		JsonObjectRequest reg = new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
-				LogHelper.i(TAG,"--------"+response.toString());
+				LogHelper.i(TAG, "--------" + response.toString());
 				apiListener.onResult(response);
 
 			}
@@ -1156,16 +1243,17 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 获取订单详细信息
+	 *
 	 * @param orderId
 	 * @param apiListener
-     */
-	public void getOrderDetials(final String orderId,final String orderType, final APIListener apiListener) {
-		String strUrl=MakeURL(DETIALS_ORDER_URL,new LinkedHashMap<String, Object>(){{
-			put("orderId",orderId);//?orderId=10&orderType=10
-			put("orderType",orderType);//?orderId=10&orderType=10
+	 */
+	public void getOrderDetials(final String orderId, final String orderType, final APIListener apiListener) {
+		String strUrl = MakeURL(DETIALS_ORDER_URL, new LinkedHashMap<String, Object>() {{
+			put("orderId", orderId);//?orderId=10&orderType=10
+			put("orderType", orderType);//?orderId=10&orderType=10
 		}});
 
-		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+		JsonObjectRequest reg = new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
@@ -1200,20 +1288,21 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 报税记录
+	 *
 	 * @param companyId
 	 * @param year
-     */
+	 */
 	public void getDatasTax(final String companyId, final String year, final APIListener apiListener) {
-		String strUrl=MakeURL(DETIALS_TAX_URL,new LinkedHashMap<String, Object>(){{
-			put("companyId",companyId);
-			put("year",year);
+		String strUrl = MakeURL(DETIALS_TAX_URL, new LinkedHashMap<String, Object>() {{
+			put("companyId", companyId);
+			put("year", year);
 		}});
 
-		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+		JsonObjectRequest reg = new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
-				LogHelper.i(TAG,"--------"+response.toString());
+				LogHelper.i(TAG, "--------" + response.toString());
 				apiListener.onResult(response);
 
 			}
@@ -1246,19 +1335,20 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 获取通讯录
+	 *
 	 * @param companyid
 	 * @param apiListener
-     */
-	public void getContactsManager(final String companyid,  final APIListener apiListener) {
-		String strUrl=MakeURL(CONTACT_URL,new LinkedHashMap<String, Object>(){{
-			put("companyid",companyid);//?companyid=16
+	 */
+	public void getContactsManager(final String companyid, final APIListener apiListener) {
+		String strUrl = MakeURL(CONTACT_URL, new LinkedHashMap<String, Object>() {{
+			put("companyid", companyid);//?companyid=16
 		}});
 
-		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+		JsonObjectRequest reg = new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
-				LogHelper.i(TAG,"--------"+response.toString());
+				LogHelper.i(TAG, "--------" + response.toString());
 				apiListener.onResult(response);
 
 			}
@@ -1290,20 +1380,21 @@ public class VolleyHelpApi extends BaseApi{
 
 	/**
 	 * 获取成员信息头像和姓名
+	 *
 	 * @param orderId
 	 * @param apiListener
-     */
+	 */
 
-	public void getDataBZChengYuan(final String orderId,  final APIListener apiListener) {
-		String strUrl=MakeURL(NUMBER_PIC_URL,new LinkedHashMap<String, Object>(){{
-			put("orderId",orderId);//?orderId=16
+	public void getDataBZChengYuan(final String orderId, final APIListener apiListener) {
+		String strUrl = MakeURL(NUMBER_PIC_URL, new LinkedHashMap<String, Object>() {{
+			put("orderId", orderId);//?orderId=16
 		}});
 
-		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+		JsonObjectRequest reg = new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				//{"message":"没有订单","result":"error","entity":null,"code":"0"}
-				LogHelper.i(TAG,"--------"+response.toString());
+				LogHelper.i(TAG, "--------" + response.toString());
 				apiListener.onResult(response);
 
 			}
@@ -1346,7 +1437,7 @@ public class VolleyHelpApi extends BaseApi{
 					apiListener.onError(errMsg);
 				} else {
 
-					LogHelper.i(TAG,"------"+response.toString());
+					LogHelper.i(TAG, "------" + response.toString());
 					apiListener.onResult(response);
 				}
 			}
@@ -1378,15 +1469,15 @@ public class VolleyHelpApi extends BaseApi{
 	/**
 	 * 获取图片
 	 */
-	public void getPictureDatas(final String orderId,  final APIListener apiListener) {
-		String strUrl=MakeURL(ORDER_PIC_URL,new LinkedHashMap<String, Object>(){{
-			put("orderId",orderId);//?companyid=16
+	public void getPictureDatas(final String orderId, final APIListener apiListener) {
+		String strUrl = MakeURL(ORDER_PIC_URL, new LinkedHashMap<String, Object>() {{
+			put("orderId", orderId);//?companyid=16
 		}});
 
-		JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+		JsonObjectRequest reg = new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogHelper.i(TAG,"--------"+response.toString());
+				LogHelper.i(TAG, "--------" + response.toString());
 				apiListener.onResult(response);
 
 			}
@@ -1415,8 +1506,48 @@ public class VolleyHelpApi extends BaseApi{
 		App.getInstance().addToRequestQueue(reg, TAG);
 
 	}
-}
 
+	/**
+	 * 获取记账中的列表数据
+	 */
+	public void getTallyListCompany(final String orderId, final APIListener apiListener) {
+		String strUrl=MakeURL(BaseApi.TALLYING_URL,new LinkedHashMap<String, Object>(){
+			{
+			}
+		});
+
+		final JsonObjectRequest reg=new JsonObjectRequest(strUrl, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+
+				apiListener.onResult(response);
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+				int type = VolleyErrorHelper.getErrType(error);
+				switch (type) {
+					case 1:
+						LogHelper.i(TAG, "超时");
+						break;
+					case 2:
+						LogHelper.i(TAG, "服务器问题");
+						break;
+					case 3:
+						LogHelper.i(TAG, "网络问题");
+						break;
+					default:
+						LogHelper.i(TAG, "未知错误");
+				}
+				apiListener.onError("服务器繁忙，稍后再试...");
+			}
+		});
+
+		App.getInstance().addToRequestQueue(reg,TAG);
+
+	}
+}
 
 	/**
 	 * 首页访问数据

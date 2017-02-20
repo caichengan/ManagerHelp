@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xht.android.managerhelp.R;
+import com.xht.android.managerhelp.util.LogHelper;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class MyCustomerAdapter extends BaseAdapter {
     private Context mContext;
     private List<MyCustomerMode> myCustomerLists;
+    private static final String TAG = "MyCustomerAdapter";
 
     public MyCustomerAdapter(Context mContext, List<MyCustomerMode> myCustomerLists) {
         this.mContext = mContext;
@@ -44,6 +46,7 @@ public class MyCustomerAdapter extends BaseAdapter {
             holder=new ViewHolder();
             convertView=View.inflate(mContext, R.layout.item_customer,null);
             holder.myTextCustomer = (TextView) convertView.findViewById(R.id.myTextCustomer);
+            holder.myTextData = (TextView) convertView.findViewById(R.id.myTextData);
             holder.mLinearCustomer = (LinearLayout) convertView.findViewById(R.id.mLinearCustomer);
 
             convertView.setTag(holder);
@@ -51,11 +54,22 @@ public class MyCustomerAdapter extends BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
         String companyName = myCustomerLists.get(position).getCompanyName();
+        String dataOut = myCustomerLists.get(position).getDataOut();
+
+        LogHelper.i(TAG,"----dataOut--"+dataOut);
+        if (dataOut!=null){
+
+            holder.myTextData.setText(dataOut+"天");
+        }else{
+            holder.myTextData.setText("");
+        }
+
         holder.myTextCustomer.setText(companyName);
         return convertView;
     }
     class ViewHolder{
         LinearLayout mLinearCustomer;
         TextView myTextCustomer;
+        TextView myTextData;
     }
 }

@@ -100,63 +100,71 @@ public class OrderPictureActivity extends Activity {
     private void analyize(Object result) throws JSONException {
 
         JSONObject JSON= (JSONObject) result;
-        JSONArray jsonArray = JSON.optJSONArray("entity");
+
         List<OrderPictBean> mListEntity=new ArrayList();
         String code = JSON.optString("code");
         if (code.equals("0")){
             App.getInstance().showToast("暂无数据");
             return;
         }
+
+        JSONArray jsonArray = JSON.optJSONArray("entity");
         LogHelper.i(TAG,"-----length--"+ jsonArray.length());
         for (int i = 0; i < jsonArray.length(); i++) {
-            OrderPictBean orderBean=new OrderPictBean();
-            List<OrderPictBean.ProcessFileBean> mListProcessFile=new ArrayList<>();
-            List<OrderPictBean.ResultFileBean> mListResultFile=new ArrayList<>();
-            JSONObject jsonObject= (JSONObject) jsonArray.get(i);
+            OrderPictBean orderBean = new OrderPictBean();
+            List<OrderPictBean.ProcessFileBean> mListProcessFile = new ArrayList<>();
+            List<OrderPictBean.ResultFileBean> mListResultFile = new ArrayList<>();
+            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
             JSONArray process_fileArray = jsonObject.optJSONArray("process_file");
             JSONArray result_fileArray = jsonObject.optJSONArray("result_file");
-            if (process_fileArray.length()>0) {
-                for (int j = 0; j < process_fileArray.length(); j++) {
-                    JSONObject jsonProgress = (JSONObject) process_fileArray.get(j);
-                    String fileId = jsonProgress.optString("fileId");
-                    String checkStatus = jsonProgress.optString("checkStatus");
-                    String upTime = jsonProgress.optString("upTime");
-                    String file = jsonProgress.optString("file");
-                    String employeeName = jsonProgress.optString("employeeName");
 
-                    LogHelper.i(TAG, "----j--process_fileArray.length()----" + j + "-------" + process_fileArray.length());
-                    LogHelper.i(TAG, "-----jsonProgress--" + file);
-                    OrderPictBean.ProcessFileBean proBean = new OrderPictBean.ProcessFileBean();
-                    proBean.setFileId(fileId);
-                    proBean.setCheckStatus(checkStatus);
-                    proBean.setUpTime(upTime);
-                    proBean.setFile(file);
-                    proBean.setEmployeeName(employeeName);
-                    mListProcessFile.add(proBean);
 
+            if (process_fileArray!=null) {
+                if (process_fileArray.length() > 0) {
+                    for (int j = 0; j < process_fileArray.length(); j++) {
+                        JSONObject jsonProgress = (JSONObject) process_fileArray.get(j);
+                        String fileId = jsonProgress.optString("fileId");
+                        String checkStatus = jsonProgress.optString("checkStatus");
+                        String upTime = jsonProgress.optString("upTime");
+                        String file = jsonProgress.optString("file");
+                        String employeeName = jsonProgress.optString("employeeName");
+
+                        LogHelper.i(TAG, "----j--process_fileArray.length()----" + j + "-------" + process_fileArray.length());
+                        LogHelper.i(TAG, "-----jsonProgress--" + file);
+                        OrderPictBean.ProcessFileBean proBean = new OrderPictBean.ProcessFileBean();
+                        proBean.setFileId(fileId);
+                        proBean.setCheckStatus(checkStatus);
+                        proBean.setUpTime(upTime);
+                        proBean.setFile(file);
+                        proBean.setEmployeeName(employeeName);
+                        mListProcessFile.add(proBean);
+
+                    }
                 }
             }
             orderBean.setProcess_file(mListProcessFile);
 
-            if (result_fileArray.length()>0) {
-                for (int k = 0; k < result_fileArray.length(); k++) {
-                    JSONObject jsonResult = (JSONObject) result_fileArray.get(k);
-                    String fileId = jsonResult.optString("fileId");
-                    String checkStatus = jsonResult.optString("checkStatus");
-                    String upTime = jsonResult.optString("upTime");
-                    String file = jsonResult.optString("file");
-                    String employeeName = jsonResult.optString("employeeName");
-                LogHelper.i(TAG,"----j--result_fileArray.length()----"+k+"-------"+result_fileArray.length());
-                LogHelper.i(TAG,"-----jsonResult--"+ file);
-                    OrderPictBean.ResultFileBean resBean = new OrderPictBean.ResultFileBean();
-                    resBean.setFileId(fileId);
-                    resBean.setCheckStatus(checkStatus);
-                    resBean.setUpTime(upTime);
-                    resBean.setFile(file);
-                    resBean.setEmployeeName(employeeName);
+            if (result_fileArray!=null) {
+                if (result_fileArray.length() > 0) {
+                    for (int k = 0; k < result_fileArray.length(); k++) {
+                        JSONObject jsonResult = (JSONObject) result_fileArray.get(k);
+                        String fileId = jsonResult.optString("fileId");
+                        String checkStatus = jsonResult.optString("checkStatus");
+                        String upTime = jsonResult.optString("upTime");
+                        String file = jsonResult.optString("file");
+                        String employeeName = jsonResult.optString("employeeName");
+                        LogHelper.i(TAG, "----j--result_fileArray.length()----" + k + "-------" + result_fileArray.length());
+                        LogHelper.i(TAG, "-----jsonResult--" + file);
+                        OrderPictBean.ResultFileBean resBean = new OrderPictBean.ResultFileBean();
+                        resBean.setFileId(fileId);
+                        resBean.setCheckStatus(checkStatus);
+                        resBean.setUpTime(upTime);
+                        resBean.setFile(file);
+                        resBean.setEmployeeName(employeeName);
 
-                    mListResultFile.add(resBean);
+                        mListResultFile.add(resBean);
 
+                    }
                 }
             }
 
@@ -178,7 +186,7 @@ public class OrderPictureActivity extends Activity {
         OrderPictAdapter adapter=new OrderPictAdapter(this,mListEntity,listviewPic);
 
         listviewPic.setAdapter(adapter);
-        LogHelper.i(TAG,"----------22222222----------");
+            LogHelper.i(TAG, "----------22222222----------");
 
     }
     /**

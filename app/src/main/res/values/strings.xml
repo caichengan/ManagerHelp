@@ -8,6 +8,8 @@
     <string name="banzhengnum_str">办证步骤量(本日)</string>
     <string name="lownum_str">低分预警</string>
     <string name="banzhengyeji_str">办证业绩统计(本日)</string>
+    <string name="banzhengout">到期合同</string>
+    <string name="tallying">记账中</string>
     <string name="mycustomer">我的客户</string>
     <string name="yuan">%1$.2f</string>
     <string name="heji_yuanjiaofen">¥ %1$.2f</string>

@@ -10,14 +10,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xht.android.managerhelp.App;
+import com.xht.android.managerhelp.CertificateListActivity;
 import com.xht.android.managerhelp.GetMoneyActivity;
 import com.xht.android.managerhelp.LowWarningActivity;
 import com.xht.android.managerhelp.MainActivity;
 import com.xht.android.managerhelp.MyCustomerActivity;
 import com.xht.android.managerhelp.NewAddCustomerActivity;
+import com.xht.android.managerhelp.OutCustomerActivity;
 import com.xht.android.managerhelp.PerformanceActivity;
 import com.xht.android.managerhelp.R;
 import com.xht.android.managerhelp.StepBanZhengActivity;
+import com.xht.android.managerhelp.TallyListActivity;
 import com.xht.android.managerhelp.mode.UserInfo;
 import com.xht.android.managerhelp.net.APIListener;
 import com.xht.android.managerhelp.net.VolleyHelpApi;
@@ -45,9 +48,15 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 	private TextView lowNumber;
 	private TextView permitNumber;
 	private TextView myCustomer;
+	private TextView OutNumber;
+	private TextView permittingNumber;
+	private TextView TallyNumber;
 	private LinearLayout lLayout04;
 	private LinearLayout lLayout05;
 	private LinearLayout lLayout06;
+	private LinearLayout lLayout07;
+	private LinearLayout lLayout08;
+	private LinearLayout lLayout09;
 	private View view;
 	private int[] mCompIds;
 	private UserInfo userInfo;
@@ -55,6 +64,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
 	public  static String ALIAS_TYPE_XHT="com.xht.android.managerhelp";
 	private String myCustomerCountCountToday;
+	private String accountExpireCount;
+	private String permittingCount;
 
 	/*@Override
 	public void onAttach(Activity activity) {
@@ -114,6 +125,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 						lowLevelWarningNotDealCount = JSONOB.optString("lowLevelWarning");
 						achievementPermitCountToday = JSONOB.optString("achievementPermit");
 						myCustomerCountCountToday = JSONOB.optString("myCustomerCount");
+						accountExpireCount = JSONOB.optString("accountExpireCount");
+						permittingCount = JSONOB.optString("permittingCount");
 
 
 						LogHelper.i(TAG, "----所有信息--" + receivablesCountToday + orderCountToday + permitStepCountToday+lowLevelWarningNotDealCount+achievementPermitCountToday);
@@ -145,6 +158,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		lLayout04.setOnClickListener(this);
 		lLayout05.setOnClickListener(this);
 		lLayout06.setOnClickListener(this);
+		lLayout07.setOnClickListener(this);
+		lLayout08.setOnClickListener(this);
+		lLayout09.setOnClickListener(this);
 
 		getMainData();
 		return view;
@@ -191,6 +207,18 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
 				IntentUtils.startActivityNumber(getActivity(),bundle,MyCustomerActivity.class);
 				break;
+			case R.id.lLayout07:
+
+				IntentUtils.startActivityNumber(getActivity(),bundle,OutCustomerActivity.class);
+				break;
+			case R.id.lLayout08:
+
+				IntentUtils.startActivityNumber(getActivity(),bundle,CertificateListActivity.class);
+				break;
+			case R.id.lLayout09:
+
+				IntentUtils.startActivityNumber(getActivity(),bundle,TallyListActivity.class);
+				break;
 		}
 
 	}
@@ -205,9 +233,15 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		lowNumber = (TextView) view.findViewById(R.id.lowNumber);
 		permitNumber = (TextView) view.findViewById(R.id.permitNumber);
 		myCustomer = (TextView) view.findViewById(R.id.myCustomer);
+		OutNumber = (TextView) view.findViewById(R.id.OutNumber);
+		permittingNumber= (TextView) view.findViewById(R.id.permittingCount);
+		TallyNumber= (TextView) view.findViewById(R.id.TallyNumber);
 		lLayout04 = (LinearLayout) view.findViewById(R.id.lLayout04);
 		lLayout05 = (LinearLayout) view.findViewById(R.id.lLayout05);
 		lLayout06 = (LinearLayout) view.findViewById(R.id.lLayout06);
+		lLayout07 = (LinearLayout) view.findViewById(R.id.lLayout07);
+		lLayout08 = (LinearLayout) view.findViewById(R.id.lLayout08);
+		lLayout09 = (LinearLayout) view.findViewById(R.id.lLayout09);
 	}
 
 
@@ -218,6 +252,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		lowNumber.setText(lowLevelWarningNotDealCount);
 		permitNumber.setText(achievementPermitCountToday);
 		myCustomer.setText(myCustomerCountCountToday);
+		OutNumber.setText(accountExpireCount);
+		permittingNumber.setText(permittingCount);
+		TallyNumber.setText("--");
 	}
 	boolean isUserLogin() {
 		if (userInfo.getUid() == 0) {
