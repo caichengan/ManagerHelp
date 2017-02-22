@@ -48,13 +48,13 @@ return 0;
         ViewHolder holder;
         if (convertView==null) {
             holder=new ViewHolder();
-            View view = View.inflate(mContext, R.layout.item_tally, null);
+            convertView= View.inflate(mContext, R.layout.item_tally, null);
 
-            holder.tallyingmCompany = (TextView) view.findViewById(R.id.tallying_mCompany);
-            holder.tallyingcom = (LinearLayout) view.findViewById(R.id.tallying_com);
-            holder.tallyingmName = (TextView) view.findViewById(R.id.tallying_mName);
-            holder.tallyingmAccount = (LinearLayout) view.findViewById(R.id.tallying_account);
-            holder.tallyingmAddress = (TextView) view.findViewById(R.id.tallying_mAddress);
+            holder.tallyingmCompany = (TextView) convertView.findViewById(R.id.tallying_mCompany);
+            holder.tallyingcom = (LinearLayout) convertView.findViewById(R.id.tallying_com);
+            holder.tallyingmName = (TextView) convertView.findViewById(R.id.tallying_mName);
+            holder.tallyingmAccount = (LinearLayout) convertView.findViewById(R.id.tallying_account);
+            holder.tallyingmAddress = (TextView) convertView.findViewById(R.id.tallying_mAddress);
             convertView.setTag(holder);
             
         }else{

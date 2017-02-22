@@ -72,7 +72,6 @@ public class MyCustomerDetialActivity extends FragmentActivity {
        /* bundle.putString("companyName",companyName);
         bundle.putString("customerName",customerName);
         bundle.putString("orderId",orderId);*/
-
         Bundle bundle = getIntent().getBundleExtra("bundle");
         companyName = bundle.getString("companyName");
         companyId = bundle.getString("companyId");
@@ -98,16 +97,13 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         mFragment5= DeclareTaxFragment.newInstance(""+companyId,""+companyName);
         mFragment6= CustomerContactsFragment.newInstance(""+companyId,""+companyName);
 
-
         mListFragment.add(mFragment1);
         mListFragment.add(mFragment2);
         mListFragment.add(mFragment3);
         mListFragment.add(mFragment4);
         mListFragment.add(mFragment5);
         mListFragment.add(mFragment6);
-
         findView();
-
     }
     private void findView() {
         FragmentPagerAdapter adapter = new NewsAdapter(getSupportFragmentManager());
@@ -119,9 +115,7 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         mCompanyName = (TextView) findViewById(R.id.MyCompanyName);
         mCompanyAddress = (TextView) findViewById(R.id.MyCompanyAddress);
 
-
         mCompanyName.setText(companyName);
-
         mCompanyAddress.setText(countyName);
 
         final TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.indicator);
@@ -129,12 +123,10 @@ public class MyCustomerDetialActivity extends FragmentActivity {
        // android:background="@drawable/btn_background_circle"
         indicator.setViewPager(pager);
 
-
        // loadDataPs();//TODO 客户头像和姓名
 
      /*   final TitlePageIndicator indicator = (TitlePageIndicator)findViewById(R.id.indicator);
         indicator.setViewPager(pager);*/
-
      /*   final float density = getResources().getDisplayMetrics().density;
         indicator.setBackgroundColor(0x18FF0000);
         indicator.setFooterColor(0xFFAA2222);
@@ -144,16 +136,13 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         indicator.setTextColor(0x00000);
         indicator.setSelectedColor(0x000000);
         indicator.setSelectedBold(true);*/
-
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
-
             @Override
             public void onPageSelected(int position) {
-
                 indicator.setCurrentItem(position);
             }
             @Override
@@ -179,7 +168,6 @@ public class MyCustomerDetialActivity extends FragmentActivity {
             return mListFragment.size();
         }
     }
-
   /*  *//**
      * 办证中获取成员数据
      *//*
@@ -187,7 +175,6 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         VolleyHelpApi.getInstance().getDataBZChengYuan(orderId, new APIListener() {
             @Override
             public void onResult(Object result) {
-
                 JSONArray jsonObj = ((JSONObject) result).optJSONArray("entity");
                //[{"employeeId":2,"headportrait":null,"employeeName":"安仔"}]
                 LogHelper.i(TAG,"------result----"+result);
@@ -197,22 +184,17 @@ public class MyCustomerDetialActivity extends FragmentActivity {
                         String headportrait = obj.optString("headportrait");
                         String employeeName = obj.optString("employeeName");
                         LogHelper.i(TAG,"-----headportrait-"+headportrait);
-
                         View view = View.inflate(MyCustomerDetialActivity.this,R.layout.item_bz_chengyuan,null);//TODO 添加头像
                         TextView textName = (TextView) view.findViewById(R.id.chengyuanName);
                         ImageView textImg = (ImageView) view.findViewById(R.id.touxiang);
-
                         textName.setText(employeeName);
                         BitmapUtils.loadImgageUrl(headportrait,textImg);
-
                         //TODO 加到滑动标签 中去
                         mLLayout.addView(view);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
-
             }
             @Override
             public void onError(Object e) {
@@ -242,7 +224,6 @@ public class MyCustomerDetialActivity extends FragmentActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     /**
      * 隐藏mProgressDialog
      */
@@ -254,6 +235,4 @@ public class MyCustomerDetialActivity extends FragmentActivity {
             mProgDoal = null;
         }
     }
-
-
 }

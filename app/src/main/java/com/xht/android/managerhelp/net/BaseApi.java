@@ -98,7 +98,7 @@ public class BaseApi {
 
 
     //访问记账中列表
-    public static final String TALLYING_URL="";
+    public static final String TALLYING_URL="http://www.xiaohoutai.com.cn:8888/XHT/accountorderController/getAccounttingData";
 
     //上传图片
     public static final String LOAD_PICTURE_URL="";
