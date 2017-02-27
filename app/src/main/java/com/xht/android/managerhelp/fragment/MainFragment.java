@@ -66,6 +66,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 	private String myCustomerCountCountToday;
 	private String accountExpireCount;
 	private String permittingCount;
+	private String accounttingCount;
 
 	/*@Override
 	public void onAttach(Activity activity) {
@@ -127,6 +128,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 						myCustomerCountCountToday = JSONOB.optString("myCustomerCount");
 						accountExpireCount = JSONOB.optString("accountExpireCount");
 						permittingCount = JSONOB.optString("permittingCount");
+						accounttingCount = JSONOB.optString("accounttingCount");
 
 
 						LogHelper.i(TAG, "----所有信息--" + receivablesCountToday + orderCountToday + permitStepCountToday+lowLevelWarningNotDealCount+achievementPermitCountToday);
@@ -254,7 +256,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		myCustomer.setText(myCustomerCountCountToday);
 		OutNumber.setText(accountExpireCount);
 		permittingNumber.setText(permittingCount);
-		TallyNumber.setText("--");
+		TallyNumber.setText(accounttingCount);
 	}
 	boolean isUserLogin() {
 		if (userInfo.getUid() == 0) {

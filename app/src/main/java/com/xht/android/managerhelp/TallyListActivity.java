@@ -141,7 +141,6 @@ public class TallyListActivity extends Activity{
         listtally.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 String company = tallylistDatas.get(position).getmCompany();
                 String companyId = tallylistDatas.get(position).getmCompanyId();
                 String orderId = tallylistDatas.get(position).getmOrderId();

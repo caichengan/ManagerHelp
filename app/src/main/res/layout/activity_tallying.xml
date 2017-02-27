@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="match_parent">
 
     <com.xht.android.managerhelp.view.ClearEditText
@@ -10,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:background="@drawable/while_stroke"
-
+        android:visibility="gone"
         android:drawableLeft="@drawable/search1"
         android:hint="请输入关键字"
         android:singleLine="true"
